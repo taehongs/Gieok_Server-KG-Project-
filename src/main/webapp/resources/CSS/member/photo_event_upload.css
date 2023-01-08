@@ -1,0 +1,378 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+
+/* =====// body display, height, font */
+/* body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+
+    height: 100vh;
+
+    font-family: var(--font-cont);
+    font-size: var(--font-size-cont3);
+
+    overflow-x: hidden;
+} */
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+/* =====// contents start //===== */
+.content {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 800px;
+}
+
+/* =====// admin menu */
+.remote_controller {
+    /* 좌측 관리자메뉴 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: absolute;
+    top: calc(50% - 350px);
+
+    left: 0;
+    z-index: 5;
+
+    width: 150px;
+    height: 700px;
+
+    background-color: rgba(51, 51, 51, .8);
+    border-radius: 20px;
+}
+
+.line_s {
+    width: 100px;
+    height: 3px;
+
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.remote_controller>span {
+    color: #fff;
+    font-size: var(--font-size-menu1);
+    font-weight: 600;
+
+    margin-top: 10px;
+}
+
+.remote_controller>span:first-of-type {
+    font-size: var(--font-size-head6);
+    margin: 0;
+    margin-bottom: -10px;
+}
+
+.remote_controller label {
+    display: block;
+    width: 100px;
+    height: 35px;
+
+    color: #fff;
+    font-size: var(--font-size-menu2);
+    text-align: center;
+    line-height: 35px;
+
+    border-radius: 5px;
+    transition: background-color .3s;
+
+    cursor: pointer;
+}
+
+.remote_controller label:hover {
+    background-color: #333;
+}
+
+.remote_controller input {
+    display: none;
+}
+
+.remote_controller input:checked+label {
+    background-color: #333;
+}
+
+#board_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 1000px;
+     height: 800px;
+
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 20px;
+    margin-top: calc(50vh - 450px);
+}
+
+.board_title>h1 {
+    /* 게시판 제목 */
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head3);
+}
+
+.board_line {
+    /* 구분선 */
+    width: 800px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #333;
+}
+
+.board_upload_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+
+    width: 800px;
+    height: 490px;
+}
+
+.board_upload_content>input,
+.board_upload_content>label,
+.board_upload_content>select {
+    height: 30px;
+
+    box-sizing: border-box;
+}
+
+.board_upload_content>select,
+.board_upload_content>input {
+    background-color: var(--color-lightgray);
+    box-shadow: inset var(--shadow-inner);
+}
+
+.board_upload_content>input {
+    padding: 10px;
+}
+
+#province {
+    width: 90px;
+
+    border: none;
+    border-radius: 5px;
+}
+
+#post_photo {
+    /* 사진 업로드 */
+    display: none;
+}
+
+#post_photo+span {
+    display: block;
+
+    position: absolute;
+    top: -70px;
+    right: 0;
+
+    opacity: 0;
+
+    width: 230px;
+    height: 20px;
+
+    font-size: var(--font-size-menu2);
+    line-height: 20px;
+    color: #fff;
+
+    background-color: rgba(51, 51, 51, .8);
+    border-radius: 3px;
+
+    box-shadow: var(--shadow-basic);
+
+    transition: top, opacity .5s, .5s;
+}
+
+#post_photo:hover+span {
+    top: -60px;
+    opacity: 1;
+}
+
+.post_photo {
+    /* 사진 업로드 버튼 */
+    display: block;
+
+    width: 100px;
+
+    color: #fff;
+    line-height: 30px;
+    font-weight: 600;
+
+    background-color: #333;
+    border-radius: 5px;
+
+    transition: transform, box-shadow .1s, .1s;
+    cursor: pointer;
+}
+
+.post_photo:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 1px 1px #333;
+}
+
+.post_photo:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+.post_photo_title {
+    /* 사진 업로드 제목 */
+    width: 120px;
+}
+
+.post_title {
+    /* 장소 이름 */
+    width: 460px
+}
+
+.post_photo_preview {
+    /* 등록 사진 미리보기 */
+    position: absolute;
+    top: 105px;
+    right: 15px;
+
+    opacity: .3;
+
+    width: 180px;
+    height: 120px;
+
+    box-shadow: var(--shadow-basic);
+    background-color: #fff;
+    border-radius: 5px;
+
+    transition: width, height, opacity .5s, .5s, .5s;
+}
+
+.post_photo_preview:hover {
+    width: 500px;
+    height: 330px;
+    opacity: 1;
+}
+
+#post_contents {
+    /* 글 내용 */
+    width: 800px;
+    height: 450px;
+
+    border: none;
+    border-radius: 5px;
+
+    box-shadow: inset var(--shadow-inner);
+    box-sizing: border-box;
+    background-color: var(--color-lightgray);
+    padding: 20px;
+    
+    resize: none;
+}
+
+.board_post_button {
+    width: 500px;
+    height: 30px;
+
+    font-size: 0;
+    text-align: center;
+}
+
+.board_post_button>input {
+    height: 30px;
+    font-weight: 600;
+}
+
+.board_post_button>input:first-of-type {
+    width: 80px;
+
+    margin-right: 10px;
+}
+
+.board_post_button>input:last-of-type {
+    width: 60px;
+
+    color: #333;
+
+    background-color: #fff;
+    border: 2px solid #333;
+}
+
+/* =====// contents end //===== */

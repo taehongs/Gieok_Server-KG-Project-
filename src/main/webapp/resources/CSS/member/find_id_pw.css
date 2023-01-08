@@ -1,0 +1,244 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 600px;
+}
+
+.find_box {
+    width: 500px;
+    height: 350px;
+
+    text-align: center;
+
+    padding: 50px 0;
+
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 20px;
+}
+
+.find_box>form {
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    width: 400px;
+    height: 350px;
+
+    /* background-color: rgba(255, 255, 255, .9); */
+    padding: 0px 50px 50px;
+    border-radius: 20px;
+}
+
+.content>div>input[type="radio"] {
+    display: none;
+}
+
+#show_find_id:checked~#find_id,
+#show_find_pw:checked~#find_pw {
+    display: flex;
+}
+
+#show_find_id:checked~.find_title>label:first-of-type,
+#show_find_pw:checked~.find_title>label:last-of-type {
+    color: var(--color-green);
+    font-weight: 600;
+}
+
+.find_title>h1 {
+    /* 전체 제목 */
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+}
+
+.find_title>label {
+    font-size: var(--font-size-cont4);
+    margin-right: 20px;
+
+    cursor: pointer;
+}
+
+.find_title>label:last-of-type {
+    margin: 0;
+}
+
+.find_box>form>div>h2 {
+    /* 소제목 */
+    width: 100%;
+
+    text-align: left;
+    font-size: var(--font-size-cont4);
+
+    margin-bottom: 5px;
+}
+
+.find_box input[type="text"],
+.find_box select {
+    height: 30px;
+
+    text-align: center;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #333;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+/* =====// id */
+.user_id_box>input {
+    width: 100px;
+}
+
+
+/* =====// phone */
+.user_phone_box {
+    font-size: 0;
+}
+
+.user_phone_box>select {
+    width: 60px;
+    margin-right: 10px;
+}
+
+.user_phone_box>input {
+    width: 70px;
+
+    margin-left: 10px;
+}
+
+.user_phone_box>input:first-of-type {
+    width: 60px;
+}
+
+/* =====// email */
+.user_email_box {
+    font-size: 0;
+}
+
+.user_email_box>select {
+    width: 70px;
+    margin-left: 15px;
+}
+
+.user_email_box>input[type="text"] {
+    margin-right: 5px;
+}
+
+.user_email_box>span {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.user_email_box>input[type="text"]:first-of-type {
+    /* 메일 */
+    width: 100px;
+}
+
+.user_email_box>input[type="text"]:last-of-type {
+    /* 도메인 */
+    width: 85px;
+}
+
+/* =====// button */
+.user_button_box {
+    width: 100%;
+
+    font-size: 0;
+    text-align: center;
+}
+
+.user_button_box>input {
+    height: 30px;
+
+    font-weight: 600;
+}
+
+.user_button_box>input[type="button"]:first-of-type {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.user_button_box>input[type="button"]:last-of-type {
+    width: 80px;
+
+    color: #333;
+
+    background-color: #fff;
+    border: 2px solid #333;
+}

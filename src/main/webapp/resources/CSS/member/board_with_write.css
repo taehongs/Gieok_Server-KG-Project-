@@ -1,0 +1,250 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+
+
+/* =====// contents */
+.board_with {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: calc(50% - 400px);
+    right: 0;
+    /*
+        top: 50% - content 높이 / 2
+        left: 50% - content 너비 / 2
+    */
+    z-index: 2;
+
+    width: 1000px;
+    height: 800px;
+
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-basic);
+}
+
+.board_type h1 {    
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head3);
+    margin-bottom: 20px;
+}
+
+.board_title {
+    width: 800px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board_title select {
+    height: 50px;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.board_title select option {
+    font-size: 13px;
+}
+
+#province {
+	width: 120px;
+	cursor: pointer;
+}
+
+#city {
+	width: 120px;
+	cursor: pointer;
+}
+
+#attraction {
+	width: 150px;
+	cursor: pointer;
+}
+
+/* .noneput { */
+/* 	display: none; */
+/* } */
+
+.board_title input {
+    width:150px;
+    height: 50px;
+    background-color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+    box-sizing: border-box;
+    flex: 1;
+    border-radius: 5px;
+}
+
+.board_title_cont > input {
+    width: 800px;
+    height: 50px;
+}
+
+.board_place {
+    margin-left: 5px;
+}
+
+.board_date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.board_date > input {
+	padding: 0px;
+	padding-left: 5px;
+}
+
+.board_people {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.board_memCount {
+    width: 50px;
+    cursor: pointer;
+}
+
+.board_title_cont {
+    display: flex;
+    align-items: center;
+    width: 800px;
+    height: 50px;
+    background-color: #fff;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+}
+
+.board_content textarea {
+    width: 740px;
+    height: 400px;
+    border: none;
+    margin-top: 10px;
+    resize: none;
+    border-radius: 5px;
+    padding: 30px;
+    cursor: auto;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
+    font-size: 20px;
+   	text-align: left;
+	line-height: 50px;
+}
+
+.checktxt {
+   position: absolute;
+   top: 225px;
+   right: 110px;
+   z-index: 2;
+}
+
+.board_button input {
+    margin-top: 47px;
+    width: 70px;
+    height: 35px;
+    font-size: 14px;
+}
+
+.board_button input[type="submit"] {
+    margin-right: 10px;
+}
+
+.board_button input[type="button"] {
+    background-color: #fff;
+    color: var(--color-black);
+    border:1px solid black;
+}
+
+

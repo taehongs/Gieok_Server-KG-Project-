@@ -1,0 +1,92 @@
+/* 나눔고딕 */
+
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.wf-nanumgothic {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 강원교육튼튼 */
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wf-gangwonTT {
+    font-family: 'GangwonEduPowerExtraBoldA';
+}
+
+/* 강원교육모두 */
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wf-gangwonMD {
+    font-family: 'GangwonEdu_OTFBoldA';
+}
+
+/* 다이어리 */
+@font-face {
+    font-family: 'EarlyFontDiary';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wf-diary {
+    font-family: 'EarlyFontDiary';
+}
+
+/* Ubuntu */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.wf-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Oswald */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+.wf-oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Josefin Sans */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap');
+
+.wf-josefinSans {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Dancing Script */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+.wf-dancingScript {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Source Code Pro */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap');
+
+.wf-sourceCodePro {
+    font-family: 'Source Code Pro', monospace;
+}
+
+/* Pacifico */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.wf-pacifico {
+    font-family: 'Pacifico', cursive;
+}
+
+/* Fira Code */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+
+.wf-firaCode {
+    font-family: 'Fira Code', monospace;
+}

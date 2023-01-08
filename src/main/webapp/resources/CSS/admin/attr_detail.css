@@ -1,0 +1,297 @@
+.fac_list {
+	position: absolute;
+	top: 50px;
+	right:100px;
+	height: 30px;
+	
+}
+
+#province {
+	width: 120px;	
+}
+#city {
+	width: 120px;	
+}
+
+
+
+/* 관광 명소 등록 */
+.attregist_container {
+	display: flex;
+	box-sizing: border-box;
+    flex-direction: column;
+    position: absolute;
+    top: calc(50vh - 450px);
+    right: 0;
+    
+    width: 1000px;
+	height: 800px;
+	
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+.attregist_default {
+    margin: auto;
+}
+.flex_row {
+	display: flex;
+    flex-direction: row;
+}
+.flex_column {
+	display: flex;
+    flex-direction: column;
+}
+/* title */
+.attreg1 {
+	width: 800px;
+	height: 24px;
+	
+	text-align: center;
+	
+	margin: 24px auto;
+	margin-top: 0;
+}
+.attreg_title {
+	font-family: var(--font-logo);
+	font-size: var(--font-size-head3);
+	font-weight: 1000;
+	
+	color: #333333;
+}
+/* 제목 */
+.attreg2 {
+	width: 800px;
+	height: 50px;
+	
+	margin: 5px auto;
+}
+.attreg_inp_title {
+	width: 800px;
+	height: 50px;
+	
+	border-radius: 5px;
+	
+	padding: 19px 20px;
+}
+/* 주소 검색 */
+.attreg3 {
+	justify-content: space-between;
+	
+	width: 800px;
+	height: 30px;
+	
+	margin: 5px auto;
+}
+.attreg_inp_addr {
+	width: 720px;
+	height: 30px;
+	
+	border-radius: 5px;
+	
+	padding: 9px 20px;
+}
+.attreg_inp_addrbtn {
+	width: 70px;
+	height: 30px;
+	
+	border-radius: 3px;
+}
+/* 내용 */
+.attreg4 {
+	justify-content: space-between;
+	
+	width: 800px;
+	height: 460px;
+	
+	margin: 5px auto;
+}
+/* 내용 입력 */
+.attreg_inp_cont {
+	width: 650px;
+	height: 30px;
+	
+	border-radius: 5px;
+	
+	padding: 9px 20px;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottm: 10px;
+}
+.attreg_inp_textarea {
+	display:block;
+	
+	width: 610px;
+	height: 370px;
+	resize: none;
+	
+	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+ 	border: 0;
+	
+	padding: 9px 20px;
+	margin: 0;
+}
+.inp_cont {
+	justify-content: space-between;
+	
+	width: 650px;
+	height: 460px;
+}
+/* 이미지 업로드 */
+.attreg_inp_img {
+	/* justify-content: space-between; */
+	
+	width: 140px;
+	height: 460px;
+	
+	background: #fff;
+	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+}
+.attreg_inp_img input[type="file"] {
+	position: absolute;
+	
+	width: 1px;
+	height: 1px;
+	
+	overflow: hidden;
+	clip:rect(0,0,0,0);
+	border: 0;
+	
+	padding: 0;
+	margin: -1px;
+}
+.attr_inp_imgcon1 {
+	align-item: center;
+	
+	margin: auto;
+}
+.attr_inp_imgcon2 {
+	margin: auto;
+}
+.preview_title {
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: center;
+
+	color: #333333;
+	
+	margin: 10px auto;
+}
+.preview_size {
+	font-weight: 700;
+	font-size: 10px;
+	line-height: 10px;
+	text-align: center;
+
+	color: #333333;
+	
+	margin: 5px auto;
+}
+/* 명소 main 이미지 */
+.preview_img {
+	width: 100px;
+	height: 60px;
+	
+	background: #D9D9D9;
+	border-radius: 5px;
+	
+	margin: 5px auto;
+}
+/* main 페이지 thumb 이미지 */
+.preview_thimg {
+	width: 100px;
+	height: 26.67px;
+
+	background: #D9D9D9;
+	border-radius: 5px;
+	
+	margin: 5px auto;
+}
+.preview_btn {
+	width: 80px;
+	height: 30px;
+	
+	font-weight: 700;
+	font-size: 12px;
+	color: #fff;
+	line-height: 30px;
+	text-align: center;
+	
+    background-color: var(--color-black);
+    border-radius: 5px;
+    
+    cursor: pointer;
+    transition: box-shadow, transform .1s, .1s;
+    
+    margin: 5px auto;
+}
+#pre_thimg {
+	overflow:hidden;
+}
+/* 하단 버튼 */
+.attreg5 {
+	justify-content: center;
+	
+	width: 800px;
+	height: 35px;
+	
+	margin: 40px auto;
+	margin-bottom: 0;
+}
+.attreg_reg_btn {
+	width: 70px;
+	height: 35px;
+
+	background: #333333;
+	border-radius: 5px;
+}
+.attreg_cac_btn:not([type="text"]) {
+	width: 70px;
+	height: 35px;
+
+	color: #333333;
+	background: #fff;
+	border: 1px solid #333333;
+	border-radius: 5px;
+	
+	margin: 0 5px;
+}
+
+/* 반응형  */
+/* @media (max-height: 950px) {
+	.admin_container {
+	    height: 760px;
+	}
+	.attregist_container {
+		height: 760px;
+	}
+} */
+@media (max-height: 800px) {
+	.admin_container {
+	    height: 650px;
+	}
+	.attregist_container {
+		height: 650px;
+	}
+	.admin_menu {
+		height: 650px;
+		overflow-y: auto;
+	}
+	.attreg4 {
+		height: 360px;
+	}
+	.inp_cont {
+		height: 360px;
+	}
+	.attreg_inp_textarea {
+		height: 262px;
+	}
+	.attreg_inp_img {
+		height: 360px;
+	} 
+}
+

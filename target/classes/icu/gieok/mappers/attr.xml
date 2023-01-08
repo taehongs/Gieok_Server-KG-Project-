@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC ".//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="attr">
+
+	<select id="getRestaurantList" parameterType="int" resultType="fac">
+		select * from attr_facility where attr_code=#{attr_code} and fac_type='2'
+	</select>
+
+	<select id="getCafeList" parameterType="int" resultType="fac">
+		select * from attr_facility where attr_code=#{attr_code} and fac_type='1'
+	</select>
+
+	<select id="getReviewList" parameterType="int" resultType="review">
+		select * from attr_review where attr_code=#{attr_code} and rev_state='R' order by rev_code DESC
+	</select>	
+	
+	<select id="avgReviewRate" parameterType="int" resultType="String">
+		select AVG(rev_rate) from attr_review where attr_code = #{attr_code} and rev_state='R'
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		insert into attr_review values(attr_rev_seq.nextval, #{rev_writer}, #{rev_content}, #{rev_rate},
+										SYSDATE, #{rev_img}, 'R', #{user_code}, #{attr_code})
+	</insert>
+	
+	<select id="getAttrReviewReport" parameterType="java.util.Map" resultType="attr_review_report">
+		select rev_report from attr_review_report where user_code=#{user_code} and rev_code=#{rev_code}
+	</select>
+	
+	<insert id="insertAttrReviewReport" parameterType="java.util.Map">
+		insert into attr_review_report values(report_seq.nextval+1, #{user_code}, #{rev_writer}, 
+											  #{rev_code}, 'Y', #{report_type})
+	</insert>
+	
+	<update id="updateAttrReviewReport" parameterType="java.util.Map">
+		update attr_review_report set rev_report='Y' where rev_code=#{rev_code} and user_code=#{user_code}
+	</update>
+	
+	<select id="getAttrLike" parameterType="java.util.Map" resultType="attrLike">
+		select * from attr_like where user_code=#{user_code} and attr_code=#{attr_code}
+	</select>
+	
+	<insert id="insertAttrLike" parameterType="attrLike">
+		insert into attr_like values(#{user_code}, #{attr_code}, #{attr_like})
+	</insert>
+	
+	<update id="updateAttrLike" parameterType="attrLike">
+		update attr_like set attr_like=#{attr_like} where attr_code=#{attr_code} and user_code=${user_code}
+	</update>
+	
+	<select id="getAttrReviewWriter" parameterType="int" resultType="int">
+		select user_code from attr_review where rev_code=#{rev_code}
+	</select>
+	
+
+	
+
+	
+	
+	
+	
+
+</mapper>

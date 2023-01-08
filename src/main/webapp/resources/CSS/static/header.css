@@ -1,0 +1,451 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// import */
+@import url(./root.css);
+
+/* =====// body display, height, font */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+
+    height: 100vh;
+
+    font-family: var(--font-cont);
+    font-size: var(--font-size-cont3);
+
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+/* =====// header start //===== */
+/* =====// background */
+.background_image {
+    position: fixed;
+    z-index: 1;
+
+    width: 100vw;
+    min-width: 1800px;
+    height: 100vh;
+
+    background: url(../../images/main_img.jpg) no-repeat;
+    background-position: 0vh -35vh;
+    background-size: cover;
+}
+
+/* =====// header */
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    /* 화면 상단 고정 */
+    position: fixed;
+    z-index: 5;
+
+    /* 100vw에서 양쪽 padding을 뺀 나머지 */
+    width: calc(100vw - (100vw - 1200px));
+    height: 100px;
+
+    background-color: var(--color-navi);
+
+    /* 네비 너비 1200을 뺀 나머지는 padding */
+    padding: 0 calc((100vw - 1200px) / 2);
+}
+
+.header>div {
+    display: flex;
+    height: 100%;
+}
+
+.header_logo>a::after {
+    /* 로고 뒤 커서 */
+    content: "|";
+    animation: none;
+}
+
+.header_logo>.change_logo::after {
+    /* blink 애니메이션 효과 */
+    animation: blink 0.5s step-end infinite;
+}
+
+@keyframes blink {
+    /* blink 애니메이션 */
+
+    0% {
+        opacity: 1;
+    }
+
+    49% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.header_logo {
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+
+}
+
+.header_logo>a {
+    color: #fff;
+    text-shadow: var(--shadow-font);
+
+    transition: .3s;
+}
+
+.header_logo>a:hover {
+    color: var(--color-main);
+}
+
+.header_logo>a:active {
+    filter: brightness(200%);
+}
+
+.header_menu {
+    /* 헤더 안 메뉴 박스 */
+    align-items: center;
+
+    position: relative;
+
+    width: 600px;
+
+    font-size: var(--font-size-menu1);
+    font-weight: 600;
+}
+
+.header_menu>ul {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.header_menu>ul>li>a {
+    display: block;
+    width: 150px;
+    height: 100px;
+
+    color: #fff;
+    text-align: center;
+    line-height: 95px;
+
+    text-shadow: var(--shadow-font);
+}
+
+.header_menu>.show {
+    position: absolute;
+    bottom: 0;
+
+    width: 150px;
+    height: 5px;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    transition: left .5s cubic-bezier(0.41, 0.09, 0.55, 1.38);
+    box-shadow: var(--shadow-basic);
+}
+
+.header_member_stat {
+    /* 헤더 안 회원 상태 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+}
+
+/* 메세지 알림 */
+#msgCount {
+	margin-left: 40px;
+	width: 20px;
+	height: 20px;
+	background: var(--color-red);
+	border-radius: 10px;
+	color: #fff;
+	text-align:center;
+	line-height: 20px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.msgCount2 {
+	position:absolute;
+}
+
+.member_image {
+    /* 회원 프로필 이미지 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-gray);
+    overflow: hidden;
+}
+
+.member_image>img {
+    cursor: pointer;
+}
+
+.member_image+input+label {
+    font-size: var(--font-size-cont3);
+    color: #fff;
+    text-align: center;
+
+    margin-top: 10px;
+
+    text-shadow: var(--shadow-font);
+
+    cursor: pointer;
+}
+
+#member_name {
+    /* 체크박스 숨김 */
+    display: none;
+}
+
+#member_name:checked~div {
+    /* 회원 메뉴 상태 */
+    display: block;
+}
+
+.menu_admin,
+.menu_member,
+.menu_non_member {
+    /* 회원 로그인 상태 메뉴 */
+    /* 관리자, 회원, 비회원 */
+    display: none;
+
+    position: fixed;
+    top: 100px;
+    z-index: 5;
+
+    width: 100px;
+
+    text-shadow: var(--shadow-basic);
+
+    background-repeat: no-repeat;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.menu_member {
+    height: 132px;
+
+    background: url(../../images/member_menu.png);
+}
+
+.menu_non_member {
+    height: 100px;
+
+    background: url(../../images/non_member_menu.png);
+}
+
+.menu_admin {
+    height: 160px;
+
+    background: url(../../images/admin_menu.png);
+}
+
+.header_member_stat>div>ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 100px;
+    height: 100%
+}
+
+.header_member_stat>div>ul>li>a {
+    color: #fff;
+    text-shadow: var(--shadow-font);
+}
+
+/* =====// header end //===== */
+
+/* =====// controller/content start //===== */
+
+.content {
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 800px;
+}
+
+.controller {
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(50vh - 350px);
+    left: calc(50% - 600px);
+    z-index: 2;
+
+    width: 200px;
+    height: calc(100vh - 100px);
+    min-height: 800px;
+}
+
+.admin_menu {
+    position: absolute;
+
+    width: 150px;
+    
+    text-align: center;
+	font-size: var(--font-size-cont3);
+    
+    background-color: rgba(51, 51, 51, .8);
+    border-radius: 20px;
+    
+    padding-bottom: 30px;
+}
+
+.admin_menu>span {
+	display: block;
+	
+	font-size: var(--font-size-cont2);
+	color: #fff;
+	font-weight: 600;
+	
+	margin: 30px 0;
+}
+
+.admin_menu>span:first-of-type {
+	font-family: var(--font-logo);
+	font-size: var(--font-size-head6);
+}
+
+.line_s {
+	width: 100px;
+	height: 3px;
+	
+	background-color: #fff;
+	margin: 10px 25px;
+	border-radius: 3px;
+}
+
+.admin_menu>ul>li {
+	display: block;
+	margin: 10px 0;
+}
+
+.admin_menu>ul>li>input {
+	display: none;
+}
+
+.admin_menu>ul>li>label {
+	display: block;
+	
+	width: 100px;
+	height: 30px;
+	
+	color: #fff;
+	line-height: 30px;
+
+	border-radius: 3px;
+	
+	margin: 0 25px;
+	cursor: pointer;
+	
+	transition: background-color .3s;
+}
+
+.admin_menu>ul>li>label:hover {
+	background-color: #333;
+}
+.admin_menu>ul>li>input:checked+label {
+	background-color: #333;
+}
+
+/* =====// controller/content end //===== */
+
+
+/* =====// board bottom start //===== */
+
+/* =====// board bottom end //===== */

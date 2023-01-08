@@ -1,0 +1,224 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+.content {
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 600px;
+    /* 1080을 위한 높이 변경 */
+}
+
+.member_login_box {
+    position: absolute;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    top: calc(50% - 317px / 2);
+    left: calc(50% - 300px / 2);
+
+    width: 300px;
+    height: 317px;
+
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: var(--radius-basic);
+    box-shadow: var(--shadow-basic);
+}
+
+/* =====// logo */
+.member_login_logo {
+    width: 100%;
+    height: 30px;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+    text-align: center;
+    color: var(--color-black);
+}
+
+
+/* =====// id */
+.member_login_id>input,
+.member_login_pw>input {
+    /* id, password */
+    position: relative;
+    z-index: 5;
+
+    width: 200px;
+    height: 30px;
+
+    text-align: center;
+    color: #fff;
+    letter-spacing: 3px;
+
+    background-color: transparent;
+    margin-top: 30px;
+}
+
+.member_login_id>span,
+.member_login_pw>span {
+    position: absolute;
+    left: 50px;
+    padding-top: 35px;
+    font-size: var(--font-size-cont2);
+
+    transition: padding, font-size .3s, .3s;
+}
+
+.member_login_id>i,
+.member_login_pw>i {
+    display: block;
+
+    position: absolute;
+
+    width: 200px;
+    height: 0px;
+
+    background-color: var(--color-black);
+    border: 1px solid var(--color-black);
+    border-radius: var(--radius-button);
+
+    transition: height, background .3s, .3s;
+}
+
+.member_login_id>input:valid~i,
+.member_login_id>input:focus~i,
+.member_login_pw>input:valid~i,
+.member_login_pw>input:focus~i {
+    height: 30px;
+
+    background-color: transparent;
+    background-color: #333;
+    border: 2px solid var(--color-black);
+
+    transform: translateY(-30px);
+}
+
+.member_login_id>input:valid~span,
+.member_login_id>input:focus~span,
+.member_login_pw>input:valid~span,
+.member_login_pw>input:focus~span {
+    padding-top: 15px;
+    font-size: var(--font-size-cont4);
+}
+
+
+/* =====// password */
+
+
+/* =====// button */
+.member_login_btn {
+    width: 100%;
+
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+.member_login_btn>input {
+    height: 30px;
+    font-weight: 600;
+}
+
+.member_login_btn>input:first-of-type {
+    width: 100px;
+}
+
+.member_login_btn>input:last-of-type {
+    width: 80px;
+
+    color: var(--color-black);
+
+    background-color: #fff;
+    border: 2px solid #333;
+}
+
+
+
+/* =====// etc */
+.member_login_etc {
+    display: flex;
+    justify-content: space-between;
+
+    width: 180px;
+
+    margin-top: 5px;
+}
+
+.member_login_etc>a {
+    font-size: var(--font-size-cont4);
+}
+
+.member_login_etc>a:last-of-type {
+    color: var(--color-green);
+    font-weight: 600;
+}

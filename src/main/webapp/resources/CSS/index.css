@@ -1,0 +1,448 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+.background_image {
+    transition: 0.5s;
+}
+
+/* =====// search box start //===== */
+.search_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    z-index: 1;
+
+    top: calc(50vh - 220px / 2);
+    left: calc(50% - 300px / 2);
+
+    width: 300px;
+    height: 220px;
+
+    transition: top cubic-bezier(0.4, 0.37, 0.59, 1.3) 0.5s;
+}
+
+.search_box > h1 {
+    font-family: "Vampiro One";
+    font-weight: 900;
+    font-size: 60px;
+    color: #fff;
+    text-shadow: var(--shadow-basic);
+    /*  */
+
+    margin-bottom: 20px;
+
+    transition: font-size cubic-bezier(0.4, 0.37, 0.59, 1.3) 0.3s;
+}
+
+.search_box > h1 > span {
+    color: #fff;
+}
+
+.search_box > form > input[type="text"] {
+    width: 300px;
+    height: 60px;
+
+    text-align: left;
+    font-size: var(--font-size-cont3);
+
+    padding-left: 20px;
+
+    box-shadow: var(--shadow-basic);
+    border: none;
+    border-radius: var(--radius-basic);
+}
+.search_box > form > input[type="submit"] {
+   display: none;
+}
+
+.search_box form > label > svg {
+    position: absolute;
+    top: 175px;
+    right: 15px;
+    bottom: calc(31px - 11px);
+   
+    cursor: pointer;
+}
+
+.search_box form > label > svg > path,
+.search_box > svg > circle {
+    transition: stroke 0.3s;
+    
+    cursor: pointer;
+}
+
+.search_box form > label > svg:hover > path,
+.search_box form > label > svg:hover > circle {
+    stroke: var(--color-black);
+    
+      
+}
+
+/* =====// search box end //===== */
+
+/* =====// contents start //===== */
+.contents {
+    display: flex;
+    justify-content: space-between;
+
+    position: absolute;
+    width: 1200px;
+    height: 500px;
+
+    padding: 50px 0;
+
+    left: calc(50vw - 600px);
+    bottom: -100vh;
+
+    flex-wrap: wrap;
+
+    transition: bottom cubic-bezier(0.4, 0.37, 0.59, 1.3) 0.7s;
+}
+
+.contents > .contents_container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+width: 100%;
+height: 600px;
+}
+
+/* =====// left */
+.content_left {
+    /*마진들이 안먹어서 일단 br로...줬어영*/
+    display: flex;
+    flex-direction: column;
+    /*flex-wrap: wrap;*/
+
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 500px;
+
+    background-size: cover;
+
+    border-radius: var(--radius-basic);
+
+    font-family: "GangwonEduPowerExtraBoldA";
+    font-size: var(--font-size-logo);
+
+    text-align: center;
+}
+.contents .content_text {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.contents .content_text > span {
+    width: 100%;
+    color: #fff;
+    text-shadow: var(--shadow-font);
+    margin: 5px 0;
+    cursor: pointer;
+}
+.contents .content_text > span:nth-of-type(1) {
+    font-size: 30px;
+}
+.contents .content_text > span:nth-of-type(2) {
+    font-size: 14px;
+    margin-top: -1px;
+    padding-bottom: 25px;
+}
+.contents .content_text > span:nth-of-type(3) {
+    font-size: 100px;
+    margin: 40px 0; /*안먹어요!!!*/
+}
+.contents .content_text > span:nth-of-type(4) {
+    font-size: 20px;
+    margin-bottom: -10px;
+}
+.contents .content_text > p {
+    /*보러가기*/
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-head6);
+
+    color: #fff;
+    text-shadow: var(--shadow-basic);
+
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+/* =====// middle */
+.content_middle {
+    width: 500px;
+    height: 500px;
+}
+
+.contents .cont_mid_top a {
+    color: white;
+    text-align: right;
+    font-size: var(--font-size-cont1);
+    
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    padding: 130px 0px;
+    text-align: center;
+}
+.contents .cont_mid_top span {
+   text-shadow: 2px 1px 1px grey;
+}
+.contents .cont_mid_top span:nth-of-type(2){
+   font-size: 15px;
+   margin-left: 160px;
+}
+.contents .content_middle span {
+    color: #fff;
+    font-size: 25px;
+}
+
+.content_middle > .cont_mid_top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "GangwonEduPowerExtraBoldA";
+
+    height: 300px;
+    margin-bottom: 30px;
+
+    background-image: url(../images/mid_top.jpg);
+    background-size: cover;
+
+    border-radius: var(--radius-basic);
+}
+
+.content_middle > .cont_mid_top:hover,
+.content_right > a:hover,
+.content_left > a:hover {
+    filter:  drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.2));
+}
+
+.content_middle > .cont_mid_bottom {
+    height: 170px;
+    text-align: center;
+}
+.content_middle .cont_mid_bottom > .notice_board_view {
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+.notice_view_more > svg {
+    bottom: 65px;
+}
+
+.cont_mid_bottom .notice_board_title {
+    font-family: var(--font-title);
+
+    font-size: var(--font-size-head5);
+    font-weight: 600;
+}
+
+.cont_mid_bottom .line {
+    width: 500px;
+    height: 3px;
+
+    background-color: #333;
+    margin-bottom: 10px;
+
+    border-radius: var(--radius-smaller);
+    /*font-family: var(--font-content);>>>>왜안먹엉?root인가뭐신가에등록안한폰트잉가용?*/
+    /* 원래 --font-cont 로 저장되있어서 그래용 */
+}
+
+.cont_mid_bottom .notice_board_title > span {
+    color: var(--color-green);
+}
+
+.cont_mid_bottom .notice_board_title ~ li {
+    font-size: var(--font-size-cont3);
+    color: #333;
+
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+.cont_mid_bottom .notice_board_title ~ li:hover {
+    color: var(--color-green);
+}
+
+/*더많은소식확인하기*/
+.cont_mid_bottom .notice_view_more {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #333;
+}
+
+.cont_mid_bottom .notice_view_more > .view_more {
+    width: 150px;
+    height: 30px;
+
+    font-size: var(--font-size-cont3);
+    color: #333;
+    text-align: center;
+
+    background-color: #fff;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: var(--radius-button);
+
+    cursor: pointer;
+}
+
+.view_more + svg {
+    transition: transform 0.1s;
+}
+
+.view_more:hover + svg {
+    transform: translate(-1px, -1px);
+}
+
+/* =====// right */
+.content_right {
+    width: 300px;
+    height: 500px;
+}
+
+.content_right > .item {
+    /* 아이템 5개에 중복으로 들어갈 속성값들 한번에 처리 */
+    height: 80px;
+
+    background-size: 100%;
+    margin-bottom: 25px;
+
+    border-radius: var(--radius-basic);
+}
+
+.content_right > .item {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #fff; /*안먹어요~~~~*/
+    font-family: "GangwonEduPowerExtraBoldA";
+    font-size: var(--font-size-head6);
+    text-shadow: 2px 1px 1px gray;
+}
+.content_right > .item:first-of-type {
+}
+
+.content_right > .item:nth-of-type(2) {
+    background-position-y: -50px;
+}
+
+.content_right > .item:nth-of-type(3) {
+}
+
+.content_right > .item:nth-of-type(4) {
+    background-position-y: -20px;
+}
+
+.content_right > .item:last-of-type {
+    margin-bottom: 0;
+}
+
+/* =====// contents end //===== */
+
+
+.scrollbar {
+   position: fixed;
+    top: calc(50vh - 100px);
+    right: 5vh;
+    
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.scrollbar .label_item{
+   width: 5px;
+    height: 100px;
+    transition: 1s;
+    background: white;
+}
+.scrollbar .item1 {
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+.scrollbar .item2 {
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+}
+
+
+

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC ".//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+
+	<select id="userListCount" parameterType="java.util.Map" resultType="int">
+		select count(user_code) from users where user_grade = 'm' and user_state = '0'
+		<if test="!category.equals('')">
+			and ${category} like '%${keyword}%'
+		</if>
+	</select>	
+	
+	<select id="adminListCount" parameterType="java.util.Map" resultType="int">
+		select count(user_code) from users where user_grade = 'a' and user_state = '0'
+		<if test="!category.equals('')">
+			and ${category} like '%${keyword}%'
+		</if>
+	</select>
+	
+	<select id="getUserList" parameterType="java.util.Map" resultType="user">
+		select * from (
+			select rowNum rNum, user_code, user_name, user_id, user_regDate,
+			user_mobcarr, user_ph1, user_ph2, user_ph3,
+			user_email, user_domain, user_grade, user_state, user_profile from 
+				(select * from users where user_grade = 'm' and user_state = '0'
+				<if test="!category.equals('')">
+					and ${category} like '%${keyword}%'
+				</if>
+				order by user_code desc)) 
+		where rNum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getAdminList" parameterType="java.util.Map" resultType="user">
+		select * from (
+			select rowNum rNum, user_code, user_name, user_id, user_regDate,
+			user_mobcarr, user_ph1, user_ph2, user_ph3,
+			user_email, user_domain, user_grade, user_state, user_profile from 
+				(select * from users where user_grade = 'a' and user_state = '0'
+				<if test="!category.equals('')">
+					and ${category} like '%${keyword}%'
+				</if>
+				order by user_code desc)) 
+		where rNum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getAdmin" parameterType="String" resultType="user">
+		select * from users where user_id = #{user_id} and user_state = '0'
+	</select>
+	
+	<update id="addAdmin" parameterType="String">
+		update users set user_grade = 'a' where user_id = #{user_id}
+	</update>
+	
+	<update id="deleteAdmin" parameterType="String">
+		update users set user_grade = 'm' where user_id = #{user_id}
+	</update>
+	
+	<select id="getReviewReportList" resultType="attr_review_report">
+		select * from (
+			select rowNum rNum, report_no, user_code, bad_member, rev_code, report_type from (
+				select * from attr_review_report where rev_report='Y' order by report_no DESC
+			)
+		) WHERE rNum BETWEEN #{startRow} AND #{endRow}
+		
+	</select>
+	
+	<select id="getBoardReportList" resultType="boardLikeReport">
+		select * from (
+			select rowNum rNum, report_no, user_code, bad_member, board_no, report_type from (
+				select * from board_like_report where board_report='Y' order by report_no DESC
+			)
+		) WHERE rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getReportUser" parameterType="int" resultType="String">
+		select user_id from users where user_code=#{user_code}
+	</select>
+	
+	<select id="getBadReview" parameterType="int" resultType="review">
+		select * from attr_review where rev_code=#{rev_code} and rev_state='R'
+	</select>
+	
+	<select id="getBadBoard" parameterType="int" resultType="board">
+		select * from board where board_no=#{board_no} and board_state='0'
+	</select>
+	
+	<select id="countReviewReport" resultType="int">
+		select count(report_no) from attr_review_report where rev_report='Y'
+	</select>
+	
+	<select id="countBoardReport" resultType="int">
+		select count(report_no) from board_like_report where board_report='Y'
+	</select>
+	
+	<update id="reviewReportDelete" parameterType="int">
+		update attr_review set rev_state='D' where rev_code=#{rev_code}
+	</update>
+	
+	<update id="updateReviewReport" parameterType="int">
+		update attr_review_report set rev_report='N' where rev_code=#{rev_code}
+	</update>
+	
+	
+	
+	
+	
+
+</mapper>

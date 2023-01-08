@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC ".//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="security">
+
+
+<!-- 	<resultMap type="user" id="userMap">
+		<id property="user_id" column="user_id" />
+		<result property="user_id" column="user_id" />
+		<result property="user_pw" column="user_pw" />
+		<result property="user_code" column="user_code" />
+		<result property="user_name" column="user_name" />
+		<result property="user_grade" column="user_grade" />
+		<result property="user_profile" column="user_profile" />
+		<result property="user_state" column="user_state" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap> -->
+
+<!-- 	<resultMap type="auth" id="authMap">
+		<result property="user_id" column="user_id" />
+		<result property="auth" column="auth" />
+	</resultMap> -->
+
+	<select id="userCheck_sec" resultType="user">
+		select * from users where users.user_id=#{user_id} and user_auth='1' and user_state='0'
+	</select>
+<!-- 	<select id="userCheck_sec" resultMap="userMap">
+		select users.user_id, user_pw, user_code, user_name, user_grade,
+		user_profile, user_state, auth
+		from users left outer join user_auth auth on users.user_id=auth.user_id
+		where users.user_id=#{user_id} and user_auth='1' and user_state='0'
+	</select> -->
+
+</mapper>

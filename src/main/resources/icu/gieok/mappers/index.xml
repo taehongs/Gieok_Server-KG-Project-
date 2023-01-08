@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Index">
+	<!--명소 목록(main_search) -->
+	<select id="getAttrList_index" parameterType="java.util.Map" resultType="attr">
+		select * from (
+					select rowNum rNum, attr_code, attr_name, attr_addr, attr_city, attr_regDate from (
+						select * from attraction where 
+								attr_name LIKE '%${keyword}%' or attr_city LIKE '%${keyword}%' 
+						<if test="sortBy.equals('')">
+							order by attr_regDate DESC
+						</if>
+						<if test="sortBy.equals('attr_code')">
+							order by ${sortBy} DESC
+						</if>
+						<if test="sortBy.equals('attr_name')">
+							order by ${sortBy} 
+						</if>
+					)
+				) where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!--명소 개수(index, main_search) -->
+	<select id="countAttr_index" resultType="int">
+		<choose>
+			<when test="keyword.equals('total')">
+				select count(*) from attraction where attr_code &gt; 0
+			</when>
+			<otherwise>
+				select count(attr_code) from attraction
+					WHERE attr_name LIKE '%${keyword}%' or attr_city LIKE '%${keyword}%'
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<!--동행 목록(main_search) -->
+	<select id="getWithList_index" parameterType="java.util.Map" resultType="board">
+	 select * from (
+	 	select rowNum rNum, board_no, board_title, board_writer, board_location,
+	 		board_startDay, board_endDay, board_memCount, board_content from (
+	 			select * from board WHERE board_type = '3' AND board_state = '0'
+		 			and (board_title LIKE '%${keyword}%' or board_content LIKE '%${keyword}%' or board_location LIKE '%${keyword}%')		 			
+	 		)z
+	 ) where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!--명소 개수 (main_search)-->
+	<select id="countWith_index" parameterType="java.util.Map" resultType="int">
+	 select count(board_no) from board where board_type='3'
+	 		and (board_title LIKE '%${keyword}%' or board_content LIKE '%${keyword}%' or board_location LIKE '%${keyword}%')
+	</select>
+	
+	<!-- 명소 (main_search)-->
+	<select id="getBoardList_index" parameterType="java.util.Map" resultType="board">
+		select * from 
+		(select rowNum rNum, board_type, board_no, board_title, board_writer, board_content,
+			board_img, board_hit, board_regdate, board_location, board_like, user_code from 
+			(
+				select * from board where board_type = '4' and board_state = '0'
+						and	(board_content like '%${keyword}%' or board_title like '%${keyword}%')
+				order by ${sortBy} desc
+			)
+		) where rNum between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 명소 총 등록 개수(index) -->
+	<select id="boardListCount_index" resultType="int">
+		select count(board_no) from board where board_type = 4 and board_state = '0'
+			and (board_content like '%${keyword}%' or board_title like '%${keyword}%')
+	</select>
+	
+	<!-- 좋아요 상위 5개(index) -->
+	<select id="getAttrLike_index" resultType="attr">
+	select * from (select attr_code, count(user_code) as like_count, rank() over (order by count(user_code) desc) as like_rank
+	from attr_like where attr_like like 'Y' group by attr_code order by like_count desc)
+	natural join attraction where like_rank &lt;=5 order by like_rank, attr_regdate desc
+	</select>
+	
+	<!--  -->
+	<select id="maxNumAttr_index" resultType="int">
+		select max(attr_code) from attraction
+	</select>
+	<select id="getAttrOne_index" resultType="attr">
+		select * from attraction where attr_code=#{ran}
+	</select>
+	
+	<select id="getAllAttrList" resultType="attr">
+		select * from attraction
+	</select>
+	
+	<select id="getPhotoLike" resultType="board">
+		select board_no, board_writer, board_img, rank() over (order by board_like desc) as board_like
+		from board where board_type = '4' and board_state = '0' order by board_like asc, board_regDate desc
+	</select>
+	
+	
+</mapper>

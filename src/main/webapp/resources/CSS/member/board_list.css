@@ -1,0 +1,460 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+
+
+/* =====// contents */
+.board_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: absolute;
+    top: calc(50% - 400px);
+    right: 0;
+    /*
+        top: 50% - content 높이 / 2
+        left: 50% - content 너비 / 2
+    */
+    z-index: 2;
+
+    width: 1000px;
+    height: 800px;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-basic);
+}
+
+.board_list > div {
+    width: 800px;
+}
+
+.board_top {
+    /* 게시판 제목, 선택 삭제, 게시물 등록 */
+    position: relative;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.board_top > h1 {
+    display: inline;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head3);
+}
+
+.board_top > .select_delete,
+.board_top > input {
+    position: absolute;
+}
+
+.board_top > .select_delete {
+    display: inline-block;
+    right: 100px;
+
+    width: 100px;
+    height: 30px;
+
+    font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+
+    cursor: pointer;
+    
+}
+.del_btn{
+    width: 70px;
+    height: 30px;
+    margin: 0;
+	border:none;
+	box-sizing: border-box;
+	background-color:transparent;
+    font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+    cursor: pointer;	
+    
+}
+.del_count{
+	display:inline-block;
+	height: 30px;
+	margin-left: -7px;
+	font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+    
+}
+
+.board_top > input {
+    display: inline-block;
+    right: 0;
+
+    width: 90px;
+    height: 30px;
+
+    color: #fff;
+    background-color: #333;
+}
+
+.board_cont {
+    height: 570px;
+
+    box-sizing: border-box;
+    border-top: 3px solid #333;
+    border-bottom: 3px solid #333;
+}
+
+/* =====// board column */
+.list_title {
+    /* 게시글 제목 */
+    display: flex;
+    align-items: center;
+
+    width: 800px;
+    height: 50px;
+
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+}
+
+.list {
+    /* 게시글 목록 */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.board_cont span {
+    /* 게시글 제목, 목록 내 폰트 */
+    display: inline-block;
+
+    font-size: var(--font-size-menu1);
+    font-weight: 600;
+    text-align: center;
+}
+
+.list > li {
+    /* 게시글 목록 */
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+    border-radius: var(--radius-basic);
+
+    transition: box-shadow, transform 0.1s, 0.1s;
+}
+
+.list > li:hover {
+    background-color: var(--color-green);
+    box-shadow: var(--shadow-basic);
+    transform: translate(-3px, -3px);
+}
+
+.list > li:hover > span,
+.list > li:hover a,
+.list > li:hover b {
+    color: #fff;
+}
+
+.list > li > span > a:hover {
+    /* 게시글 제목에 링크, 마우스 오버시 밑줄 */
+    text-decoration: underline;
+}
+
+.list b {
+    /* 공지, 이벤트 구분 머릿글, 이벤트 상태 */
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.list > li > span {
+    font-size: var(--font-size-cont3);
+    font-weight: 100;
+}
+
+.list .event_inprogress {
+    color: var(--color-green);
+    display: block;
+    width: 60px;
+}
+.list p {
+	height: 50px;
+	line-height: 50px;
+}
+
+.list .event_end {
+    color: var(--color-red);
+}
+
+.list > li > .board_date {
+    font-size: var(--font-size-cont4);
+}
+
+/* =====// title, list column width */
+.board_no {
+    /* 게시글 번호 */
+    width: 80px;
+}
+
+.board_writer {
+    /* 게시글 작성자 */
+    width: 110px;
+}
+
+.board_title {
+    /* 게시글 제목 */
+    width: 380px;
+}
+.board_title a{
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	cursor: pointer;
+}
+
+.board_stat {
+    /* 게시글 상태 */
+    width: 60px;
+}
+
+.board_date {
+    /* 게시글 등록 날짜 */
+    width: 100px;
+}
+
+.board_select {
+    /* 게시글 선택(체크박스) */
+    width: 70px;
+}
+
+/* =====// prev, next, page number */
+.board_page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 800px;
+    height: 20px;
+
+    font-size: var(--font-size-cont3);
+}
+.select_page {
+	
+	background-color: #333;
+    color: #fff;
+}
+
+.prev > span,
+.next > span {
+    display: inline-block;
+
+    width: 50px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+
+    border-radius: var(--radius-smaller);
+
+    cursor: pointer;
+}
+.prev a,
+.next a{
+	display:block;
+}
+
+.board_page {
+    width: 400px;
+}
+
+.board_page > li {
+    width: 30px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+
+    border-radius: var(--radius-smaller);
+
+    cursor: pointer;
+}
+.board_page a{
+	display: block;
+}
+
+.board_page span,
+.board_page li,
+.board_page a {
+    transition: background-color, color 0.3s, 0.3s;
+}
+
+.board_page span:hover,
+.board_page li:hover,
+.board_page a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* =====// contents end //===== */
+
+/* =====// board bottom start //===== */
+.board_bottom {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 30px;
+}
+.board_bottom form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* =====// search, sort, event end */
+.board_sort {
+    /* 하단 정렬 */
+    width: 200px;
+    height: 30px;
+
+    text-align: center;
+}
+
+.board_search {
+    /* 하단 검색 */
+    width: 300px;
+    height: 30px;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.board_sort > select,
+.board_search > select {
+    width: 70px;
+    height: 30px;
+
+    border-radius: var(--radius-button);
+}
+.board_search input[type="text"]{
+	width: 140px;
+	height: 30px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	margin-left: 5px;
+}
+
+.board_sort > input[type="submit"],
+.board_search > input[type="submit"] {
+    height: 30px;
+    color: #fff;
+    background-color: var(--color-black);
+    margin-left: 5px;
+
+    border-radius: var(--radius-button);
+}
+.board_sort > input[type="submit"]{
+	width: 50px;
+}
+.board_search > input[type="submit"] {
+	width: 70px;
+}
+
+.event_end_button {
+    /* 선택 이벤트 종료 버튼 */
+    display: inline-block;
+
+    position: absolute;
+    right: 100px;
+   bottom : 30px;
+
+    width: 120px;
+    height: 30px;
+
+    font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+    text-align: right;
+    line-height: 30px;
+    
+    box-sizing: border-box;
+    background: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+/* =====// board bottom end //===== */

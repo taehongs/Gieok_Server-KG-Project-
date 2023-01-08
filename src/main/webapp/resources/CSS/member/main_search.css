@@ -1,0 +1,254 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+u, i, strike, b, font,
+span, span>p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+   	font-size: 12px !important;
+	text-decoration: none;
+	color: #333;
+	font-family: var(--font-cont) !important;
+	font-weight: 100;
+	background-color: transparent;
+	line-height: auto;
+	background-color: inherit !important;
+	text-align: left !important;
+}
+
+/* =====// search box start //===== */
+.content::-webkit-scrollbar {
+    width: 10px;
+}
+.content::-webkit-scrollbar-thumb {
+    width: 8px;
+    background-color: #333;
+}
+
+.search_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    z-index: 4;
+
+    top: 100px;
+    left: calc(50% - 300px / 2);
+
+    width: 300px;
+    height: 60px;
+
+    transition: top cubic-bezier(0.4, 0.37, 0.59, 1.3) 0.5s;
+}
+
+.search_box > input[type="text"] {
+    width: 300px;
+    height: 60px;
+
+    text-align: left;
+    font-size: var(--font-size-cont3);
+
+    padding-left: 20px;
+
+    box-shadow: var(--shadow-basic);
+    border: none;
+    border-radius: var(--radius-basic);
+}
+
+.search_box > input[type="submit"] {
+	display: none;	
+}
+
+.search_box > label > svg {
+    /*돋보기*/
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    bottom: calc(31px - 11px);
+
+    cursor: pointer;
+}
+
+.search_box > label > svg > path,
+.search_box > label > svg > circle {
+    transition: stroke 0.3s;
+}
+
+.search_box > label > svg:hover > path,
+.search_box > label > svg:hover > circle {
+    stroke: var(--color-black);
+}
+
+/* =====// search box end //===== */
+
+/* =====// contents start //===== */
+.content {
+    position: relative;
+    top: 200px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+
+    min-height: 600px;
+}
+
+.search_content {
+    width: 1200px;
+    min-height: 50px;
+
+    margin-bottom: 50px;
+    padding: 30px 100px;
+    box-sizing: border-box;
+    box-shadow: var(--shadow-basic);
+    border-radius: var(--radius-basic);
+
+    background-color: rgba(225, 225, 225, 0.9);
+    text-align: center;
+}
+
+.search_content > h1 {
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head6);
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.search_content>h1>span {
+    font-size: 14px;
+}
+
+.line {
+    width: 1000px;
+    height: 3px;
+
+    background-color: #333;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.search_content > ul > li {
+    display: flex;
+    margin: 10px 0;
+}
+
+.board_info > a > span {
+    display: block;
+    cursor: pointer;
+}
+.board_info > a >  span:first-of-type {
+    /*게시물 제목*/
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.board_info > a > span:last-of-type {
+    /*게시물 내용*/
+    height: 4.8em;
+    font-size: 12px;
+    text-overflow: ellipsis;
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.2em;
+}/*수정함*/
+
+/* ===================1. map (명소) ===*/
+/* ===================2. notice event (공지이벤트) ===*/
+/* ===================3. with (동행) ===*/
+/* ===================4. photo event(포토이벤트) ===*/
+.board_img {
+    display: inline-block;
+
+    width: 120px;
+    height: 80px;
+
+    border-radius: 5px;
+    background-color: #333;
+}
+
+.board_img img{
+	width: 100%;
+}
+
+.board_info {
+    display: inline-block;
+    margin-left: 10px;
+
+    height: 80px;
+}
+
+.view_more_btn {
+    width: 100px;
+    height: 30px;
+    margin: 10px 0;
+}

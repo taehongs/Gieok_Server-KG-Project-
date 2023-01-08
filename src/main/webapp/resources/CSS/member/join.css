@@ -1,0 +1,380 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 600px;
+}
+
+/* ===== all */
+.content>.member_terms_box>h1,
+.content>form>h1 {
+    width: 100%;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+    text-align: center;
+}
+
+/* =====// terms of use start //===== */
+.member_terms_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    left: calc(50% - 250px);
+
+    width: 500px;
+    height: 750px;
+
+    background-color: #fff;
+    border-radius: var(--radius-basic);
+    box-shadow: var(--shadow-basic);
+
+    transition: left 1s;
+    transition-timing-function: ease-in;
+}
+
+.member_terms_box>div>input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+
+    margin: 0;
+}
+
+.member_terms_box>div>input[type="checkbox"]+label {
+    display: block;
+
+    width: 280px;
+    height: 15px;
+
+    line-height: 15px;
+
+    float: right;
+    cursor: pointer;
+}
+
+/* =====// all agree */
+.all_agree {
+    width: 300px;
+    height: 15px;
+
+    font-weight: 600;
+    text-align: left;
+}
+
+/* =====// terms contents */
+.terms {
+    width: 300px;
+}
+
+.terms>label>strong {
+    color: var(--color-red);
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.terms:nth-of-type(4)>label>strong {
+    color: var(--color-darkgray);
+}
+
+.terms>p {
+    width: 300px;
+    height: 130px;
+
+    border: 1px solid #333;
+    border-radius: var(--radius-button);
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 5px;
+
+    overflow: auto;
+}
+
+.terms>p::-webkit-scrollbar {
+    width: 5px;
+}
+
+.terms>p::-webkit-scrollbar-thumb {
+    width: 3px;
+    background-color: #333;
+    border-radius: 3px;
+}
+
+/* =====// terms button */
+.terms_button {
+    width: 500px;
+    height: 30px;
+
+    font-size: 0;
+    text-align: center;
+}
+
+.terms_button>input[type="button"] {
+    width: 90px;
+    height: 30px;
+}
+
+.terms_button>input[type="button"]:nth-of-type(2) {
+    width: 60px;
+
+    color: #333;
+
+    background-color: #fff;
+    margin-left: 10px;
+
+    border: 1px solid #333;
+}
+
+.dis {
+    background-color: var(--color-darkgray) !important;
+    text-decoration: line-through;
+}
+
+.dis:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* =====// terms of use end //===== */
+
+/* =====// user join form start //===== */
+.member_join_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 500px;
+    height: 750px;
+
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: var(--radius-basic);
+
+    box-shadow: var(--shadow-basic);
+}
+
+/* =====// user join form all */
+#terms_select {
+    display: none;
+}
+
+.member_join_box>div {
+    width: 200px;
+    margin: 0 150px;
+}
+
+.member_join_box>div>input {
+    height: 30px;
+    text-align: center;
+}
+
+.member_join_box>div>input[type="text"],
+.member_join_box>div>input[type="password"] {
+    background-color: transparent;
+
+    border: none;
+    border-bottom: 1px solid #333;
+    border-radius: 0;
+}
+
+.member_join_box>div>h2 {
+    font-size: var(--font-size-cont3);
+}
+
+.member_join_box>div>span {
+    display: block;
+
+    font-size: var(--font-size-cont3) !important;
+    color: var(--color-darkgray);
+    stroke: var(--color-darkgray);
+
+    margin: 5px 10px 0 0;
+
+    float: left;
+}
+
+.member_join_box>div>select {
+    height: 30px;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #333;
+    margin-top: 10px;
+}
+
+/* =====// member id */
+.member_join_id {
+    font-size: 0;
+}
+
+.member_join_id>input[type="text"] {
+    width: 130px;
+    margin-right: 10px;
+}
+
+.member_join_id>input[type="button"] {
+    width: 60px;
+}
+
+/* =====// member name */
+.member_join_name>input[type="text"],
+.member_join_pw>input[type="password"],
+.member_join_pw2>input[type="password"] {
+    /* name, pw, pw2 input */
+    width: 200px;
+}
+
+/* =====// member password */
+
+/* =====// member password2 */
+
+/* =====// member phone */
+.member_join_phone {
+    font-size: 0;
+}
+
+.member_join_phone>select {
+    width: 70px;
+    margin-right: 110px;
+}
+
+.member_join_phone>input[type="text"] {
+    width: 60px;
+    margin-left: 15px;
+}
+
+.member_join_phone>input[type="text"]:first-of-type {
+    width: 50px;
+    margin-left: 0;
+}
+
+/* =====// member email */
+.member_join_email {
+    font-size: 0;
+}
+
+.member_join_email>input {
+    width: 90px;
+}
+
+.member_join_email>input:first-of-type+span {
+    display: inline-block;
+
+    width: 20px;
+    height: 30px;
+
+    text-align: center;
+
+    margin: 0;
+
+    float: none;
+}
+
+.member_join_email>select {
+    width: 80px;
+
+    margin: 0 60px 0 0;
+}
+
+.member_join_email>input:last-of-type {
+    width: 60px;
+}
+
+/* =====// member button */
+.member_join_button {
+    text-align: center;
+    font-size: 0;
+}
+
+.member_join_button>input[type="submit"] {
+    width: 90px;
+    margin-right: 10px;
+}
+
+.member_join_button>input[type="button"] {
+    width: 60px;
+
+    color: #333;
+
+    background-color: #fff;
+    border: 1px solid #333;
+}
+
+/* =====// user join form end //===== */

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="
+   	  http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<aop:aspectj-autoproxy />
+	
+	<!-- 스프링 API로 오라클 연결(Spring jdbc) -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- property는 클래스 소속의 변수와 값 -->
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="gieokdb" /> 
+		<property name="password" value="rldjr123$" /> 
+	</bean>
+		
+	<!-- Spring JDBC dataSource와 mybatis를 연결 + mybatis 환경설정 파일 (자바 저장빈 클래스 객체 별칭 관리)-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- setter()를 통한 DI(의존성 주입) -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- classpath 경로는 해당 개발툴의 메이븐 폴더 가상 경로가 아니고 was 서버에 의해서 변경된 실제 프로젝트의
+		WEB-INF/classes 경로를 가르킨다. mybatis-config.xml 파일의 역할은 자바 저장빈 클래스  객체 별칭을 관리한다. 
+		개발툴의 가상경로는 src/main/resources이다.-->
+		<property name="configLocation" value="classpath:/mybatis-config.xml" /> 
+		<property name="mapperLocations" value="classpath:icu/gieok/mappers/*.xml" /> 
+	</bean>
+		
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- setter()를 통한 DI인젝션과 빈아이디 dataSource를 호출하면서 트랜잭션이 반영 -->
+		<property name="dataSource" ref="dataSource" /> 
+	</bean>
+	
+	<tx:annotation-driven />
+	
+	<bean id="sqlSesison" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<!-- clearCache는 임시 메모리 캐시를 비워서 DB연결을 해제 -->
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<!-- 생성자를 통한 의존성 주입 -->
+	</bean>
+	
+	
+    <!-- email 인증 관련   -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="dlwlsgur0@gmail.com"/>
+        <property name="password" value="evpavtjzpwnzmsfa" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+        </property>
+    </bean>
+	
+	
+	<!-- DAOImpl의 @Repository로 설정된 부분을 스프링에서 오토스캔하게 해준다 -->
+	<context:component-scan base-package="icu.gieok.dao"/> 
+	
+	<!-- 서비스 추가 이유 
+		1. 컨트롤러와 DAOImpl을 연결하는 중간 매개체 역할을 한다.
+		2. 고객의 추가 요구 사항을 반영하는 부분이다. 
+		3. Spring의 AOP를 통한 트랜잭션 적용 부분이다. 그러면 항상 사이트의 데이터 불일치 현상을 제거해서 신뢰도를 올려준다. 
+	-->
+	<context:component-scan base-package="icu.gieok.service" />
+	<context:component-scan base-package="icu.gieok.utils" />
+	
+	<!-- AOP 설정 => 어노테이션 말고  -->
+	<aop:config />
+	
+	
+</beans>

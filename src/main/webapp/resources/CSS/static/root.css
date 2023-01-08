@@ -1,0 +1,161 @@
+@import url(reset.css);
+@import url(webFont.css);
+
+*:not(strike):not(u):not(font):not(a) {
+    color: #333333;
+    text-decoration: none;
+
+    outline: none;
+    cursor: default;
+}
+
+b {
+   font-weight: 600;
+}
+
+i {
+   font-style: italic;
+}
+
+a,
+select {
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+select,
+option {
+    font-size: var(--font-size-cont3);
+    text-align: center;
+    color: #333;
+}
+
+textarea {
+    cursor: text;
+    line-height: 25px;
+}
+
+textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 3px;
+}
+
+input {
+    font-size: var(--font-size-cont3);
+
+    box-sizing: border-box;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--color-darkgray);
+}
+
+/* input checkbox checked color */
+input[type="checkbox"] {
+    accent-color: var(--color-black);
+    cursor: pointer;
+}
+
+/* input button hover, active */
+input[type="submit"],
+input[type="button"] {
+    color: #fff;
+
+    background-color: var(--color-black);
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: box-shadow, transform .1s, .1s;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    box-shadow: 1px 1px 0px #000;
+    transform: translate(-1px, -1px);
+}
+
+input[type="submit"]:active,
+input[type="button"]:active {
+    box-shadow: none;
+    transform: translate(1px, 1px);
+}
+
+/* input text, password */
+input[type="text"],
+input[type="password"] {
+    color: var(--color-black);
+
+    background-color: #fff;
+    border-radius: 5px;
+
+    cursor: text;
+}
+
+:root {
+    /* font-family */
+    --font-logo: 'GangwonEduPowerExtraBoldA';
+    --font-title: 'GangwonEduPowerExtraBoldA';
+    --font-cont: 'Nanum Gothic';
+    --font-msg: 'GangwonEdu_OTFBoldA';
+
+    /* font-size */
+    --font-size-logo: 30px;
+    --font-size-head1: 28px;
+    --font-size-head2: 26px;
+    --font-size-head3: 24px;
+    --font-size-head4: 22px;
+    --font-size-head5: 20px;
+    --font-size-head6: 18px;
+
+    --font-size-cont1: 16px;
+    --font-size-cont2: 14px;
+    --font-size-cont3: 12px;
+    --font-size-cont4: 10px;
+
+    --font-size-menu1: 14px;
+    --font-size-menu2: 12px;
+
+    --font-size-button: 14px;
+    --font-size-input: 12px;
+
+    /* color */
+    --color-main: ;
+    --color-sub: ;
+
+    --color-navi: rgba(0, 0, 0, .2);
+
+    --color-black: #333333;
+    /* 기본 폰트 색상, 검정 대용 */
+    --color-red: #982C2C;
+    /* 경고(변경, 탈퇴, 삭제 등) */
+    --color-green: #509797;
+    /* 긍정(동의, 저장, 확인) 등 */
+    --color-lightgray: #EEEEEE;
+    --color-gray: #CCCCCC;
+    /* 기본 그레이 */
+    --color-darkgray: #909090;
+    /* placeholder, 유효성검사 */
+
+    --color-shadow: rgba(0, 0, 0, .2);
+    --color-shadow-font: rgba(0, 0, 0, .7);
+
+    --shadow-basic: 3px 3px 5px var(--color-shadow);
+    --shadow-inner: 0px 3px 3px var(--color-shadow);
+    --shadow-font: 3px 3px 5px var(--color-shadow-font);
+
+    /* border radius */
+    --radius-basic: 20px;
+    --radius-button: 5px;
+    --radius-smaller: 3px;
+}

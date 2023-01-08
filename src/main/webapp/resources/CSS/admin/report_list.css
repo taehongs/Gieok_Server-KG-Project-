@@ -1,0 +1,411 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 600px;
+}
+
+.review_report_detail {
+	position: absolute;
+	top: 0px;
+    width: 400px;
+    height: 370px;
+
+    text-align: center;
+    font-size: 0;
+
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 20px 20px;
+
+	transition: 0.7s cubic-bezier(0.5, -0.08, 0.63, 1.18);
+	opacity:0;
+	z-index: -1;
+
+    box-shadow: var(--shadow-basic);
+}
+
+.attr_review_content {
+    width: 350px;
+    height: 100px;
+
+	font-size: 14px;
+	text-align: left;
+	
+    border: none;
+    background-color: var(--color-lightgray);
+    box-shadow: inset var(--shadow-inner);
+}
+
+.file_and_rate {
+	margin-top: 10px;
+	width: 350px;
+	text-align: left;
+}
+
+.file_and_rate>img {
+	width: 350px;
+	height: 150px;
+			
+}
+
+.file_and_rate> .writer {
+	font-size: 16px;
+	margin-right: 10px;
+}
+
+.file_and_rate> .rate {
+    width: 100px;
+    height: 25px;
+	
+    font-size: 16px;
+    color: rgb(241, 232, 43);
+    text-shadow: 0 0 2px rgb(168, 149, 26);
+
+    background-color: transparent;
+    border: none;
+}
+
+.file_and_rate>select>option {
+    text-align: left;
+    color: rgb(241, 232, 43);
+}
+
+.form_button {
+    width: 350px;
+    height: 30px;
+
+    font-size: 0;
+
+    margin: 20px 0;
+}
+
+.form_button>input {
+    width: 50px;
+    height: 25px;
+
+    font-weight: 600;
+}
+
+.form_button>input:first-of-type {
+    margin-right: 5px;
+}
+
+.form_button>input:last-of-type {
+    color: #333;
+
+    background-color: #fff;
+    border: 1px solid #333;
+}
+
+.review_delete_btn { 
+	color: #fff !important;
+	background: var(--color-red) !important;
+	border: 1px solid #333;
+	font-size: 12px;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+
+.report_list_box {
+    width: 600px;
+    height: 650px;
+
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 20px;
+    box-sizing: border-box;
+	
+	margin-top: 16px;
+
+    padding: 30px 25px;
+}
+
+.report_title {
+    width: 100%;
+
+    text-align: center;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+
+    margin-bottom: 20px;
+}
+
+.report_col {
+    width: 600px;
+    height: 30px;
+}
+
+.report_list {
+    height: 400px;
+}
+
+.report_list>li,
+.report_col {
+    height: 30px;
+
+    font-size: 0;
+    color: #333;
+
+    margin: 10px 0;
+
+    transition: background-color .3s;
+}
+
+.report_list>li>span {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+}
+
+.report_list>li>span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    transition: color .3s;
+}
+
+.report_list>li:hover {
+    background-color: #509797;
+}
+
+.report_list>li:hover>span {
+    color: #fff;
+    cursor: pointer;
+}
+
+.report_list>li>span,
+.report_col>span {
+    display: inline-block;
+
+    height: 30px;
+
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.report_list>li>span:first-of-type,
+.report_col>span:first-of-type {
+    width: 35px;
+}
+
+.report_list>li>span:nth-of-type(2),
+.report_col>span:nth-of-type(2) {
+    width: 80px;
+}
+
+.report_list>li>span:nth-of-type(3),
+.report_col>span:nth-of-type(3) {
+    width: 165px;
+}
+
+.report_list>li>span:nth-of-type(3),
+.report_list>li>span:nth-of-type(4) {
+    font-size: 12px;
+}
+
+.report_list>li>span:nth-of-type(4) {
+	text-align: left;
+}
+
+.report_list>li>span:nth-of-type(5) {
+	text-align: center;
+}
+
+.report_list>li>span:nth-of-type(4),
+.report_col>span:nth-of-type(4) {
+    width: 190px;
+}
+
+.report_list>li>div>span:last-of-type,
+.report_col>span:last-of-type {
+    width: 80px;
+}
+
+
+
+
+.line_s2 {
+    width: 550px;
+    height: 3px;
+
+    background-color: #333;
+    border-radius: 3px;
+
+    margin: 10px 0;
+}
+
+.report_page {
+    display: flex;
+    justify-content: space-between;
+
+    width: 550px;
+    height: 30px;
+
+    font-size: 0;
+}
+
+.report_page>a {
+
+    width: 40px;
+    height: 30px;
+
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.report_page>span {
+    display: inline-block;
+
+    width: 40px;
+    height: 30px;
+
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.select_page {
+	background-color: #333;
+    color: #fff;
+}
+
+
+.page {
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 350px;
+    font-size: 14px;
+
+    padding-top: 5px;
+}
+
+.page>li>a {
+    display: inline-block;
+}
+
+.page>li,
+.page>li>a {
+    width: 30px;
+    height: 20px;
+
+    text-align: center;
+    line-height: 20px;
+
+    border-radius: 3px;
+
+    transition: background, color .3s, .3s;
+}
+
+.report_page>span:hover,
+.report_page>a:hover,
+.page>li:hover>a,
+.page>li>a:hover {
+    background: #333;
+    color: #fff;
+}
+
+.report_box_button {
+    width: 100%;
+
+    text-align: center;
+}
+
+.report_box_button>input {
+    width: 60px;
+    height: 30px;
+
+    color: #333;
+    font-weight: 600;
+
+    background-color: #fff;
+    border: 2px solid #333;
+    margin-top: 10px;
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/security
+                     http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+	<!-- 로그인 시도 시 확인하는 class -->
+	<bean id="memberDetailsService"
+		class="icu.gieok.security.MemberDetailsService" />
+
+	<!-- 로그인 성공 시 -->
+	<bean id="loginSuccessHandler"
+		class="icu.gieok.security.LoginSuccessHandler" />
+
+	<!-- 로그인 실패 시 -->
+	<bean id="loginFailureHandler"
+		class="icu.gieok.security.LoginFailureHandler" />
+
+
+	<!-- 비밀번호 암호화(시큐리티에서 제공하는 클래스 이용) -->
+	<bean id="bCryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!-- 403 접근 금지 에러 발생 시 -->
+ 	<bean id="memberAccessDeniedHandler"
+		class="icu.gieok.security.MemberAccessDeniedHandler" />
+
+
+	<!-- security 제외 url -->
+	<security:http pattern="/member/**" security="none" />
+	<security:http pattern="/admin/**" security="none" />
+	<security:http pattern="/photo**" security="none" />
+	<security:http pattern="/board**" security="none" />
+	<security:http pattern="/mywrite_with**" security="none" />
+	<security:http pattern="/my_with**" security="none" />
+	<security:http pattern="/change_with**" security="none" />
+	
+	
+<!-- 	<security:http pattern="/mywrite_with_delete" security="none" />
+	<security:http pattern="/mywrite_with_acceptcount" security="none" />
+	<security:http pattern="/my_with_list" security="none" />
+	<security:http pattern="/change_with_accept" security="none" />
+	<security:http pattern="/my_with_accept" security="none" />
+	<security:http pattern="/my_with_reject" security="none" />
+	<security:http pattern="/photo_event_listDelete" security="none" />
+	<security:http pattern="/photo_event_detailLike" security="none" />
+	<security:http pattern="/photo_event_detailReport" security="none" />
+	<security:http pattern="/photo_event_update" security="none" />
+	<security:http pattern="/photo_event_upload" security="none" />
+	<security:http pattern="/board_with_sinchung" security="none" />
+	<security:http pattern="/board_with_delbtn" security="none" />
+	<security:http pattern="/board_with_report" security="none" />
+	<security:http pattern="/board_with_sindel" security="none" />
+	<security:http pattern="/board_with_province" security="none" />
+	<security:http pattern="/board_with_city" security="none" />
+	<security:http pattern="/board_with_attr" security="none" />
+	<security:http pattern="/board_with_write" security="none" /> -->
+
+
+	<security:http auto-config="false" use-expressions="true">
+
+		<security:intercept-url pattern="/**" access="permitAll"/>
+
+		<!-- 로그인 폼 -->
+		<security:form-login login-page="/login"
+			default-target-url="/" username-parameter="user_id"
+			password-parameter="user_pw"
+			authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler" />
+
+		<!-- 로그아웃 -->
+		<security:logout logout-url="/logout"
+			logout-success-url="/" invalidate-session="true" />
+		<!-- invalidate-session="true": 로그아웃 시 세션 무효화 -->
+
+		<!-- 중복 로그인 관련 -->
+		<security:session-management
+			invalid-session-url="/login">
+			<!-- max-sessions="1"(중복가능 세션수) expired-url="/member/login"(중복 로그인시 이동할 
+				페이지) -->
+			<security:concurrency-control
+				max-sessions="1" expired-url="/login" />
+		</security:session-management>
+
+		<!-- 403 접근 금지 에러 발생 시 -->
+ 	 	<security:access-denied-handler
+			ref="memberAccessDeniedHandler" />
+
+	</security:http>
+
+	<!-- 인증 관리자(로그인하는 아이디의 권한을 확인) -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="memberDetailsService">
+			<security:password-encoder
+				ref="bCryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+
+
+</beans>

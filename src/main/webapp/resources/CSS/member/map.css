@@ -1,0 +1,163 @@
+body {
+	font-family: var(--font-main);
+	overflow-Y: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+
+.content_map {
+    position: absolute;
+    top: 100px;
+    left: calc(50vw - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 800px;
+}
+
+
+
+.map-wrapper {
+    position: relative; 
+    box-sizing: border-box;
+    top: calc(50% - 400px);
+    left: calc(50% - 500px ); 
+    width: 1000px;
+    height: 800px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.text-container {
+	position: absolute;
+    box-sizing: border-box;
+    right: 50px;
+	top: 50px;
+	width: 300px;
+	height: 100px;
+    border-radius: 20px;
+    font-family: var(--font-logo);
+}
+
+.TEXT {
+    display: block;
+    position: absolute;
+    width: 100%;
+    fill: #333;
+    font-size: 0;
+    font-weight: 550;
+    text-align: center;
+    transition: 0.3s;
+}
+
+svg.korea-map {
+    position: relative;
+    box-sizing: border-box;
+    width: 600px;
+    height: 800px;
+    border-radius: 20px;
+    transform: translateX(200px);
+    transition: 1.2s;
+}
+
+.korea-map-city-tab {
+    position: absolute;
+    box-sizing: border-box;
+   	right: 50px;
+	top: 50px;
+	width: 300px;
+	height: 510px;
+    margin: 0;
+    border-radius: 20px;
+    transform: translateX(100%);
+    transition: transform 1.2s;
+    opacity: 0; 
+    overflow: hidden;
+	box-shadow: var(--shadow-basic);
+	z-index: 6;
+}
+
+.tab-line {
+	width: 250px;
+	height: 3px;
+	background: #333; 
+	margin-left: 25px;
+	margin-top: 100px;
+}
+
+.korea-map-city-ul {
+    box-sizing: border-box;
+    width: 100%;
+    height: 410px;
+    transition: 2s;
+    overflow-y: auto;
+}
+
+
+.korea-map-city-ul li {
+    width: 100%;
+    transition: background .3s;
+}
+
+.korea-map-city-ul::-webkit-scrollbar {
+	width: 5px;
+}
+.korea-map-city-ul::-webkit-scrollbar-thumb{
+	width: 3px;
+	background: #509797;	
+}
+
+
+.korea-map-city-ul li:hover>a {
+	color: #fff;
+	background: #509797;
+}
+
+
+.korea-map-city-ul li a {
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    height: 100%;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    line-height: 50px;
+}
+
+.block {
+    position: fixed;
+    box-sizing: border-box;
+    left: 0;
+    top: 100px;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    opacity: 0;
+    z-index: 0;
+}
+
+.south-ko,
+.south-ko>path {
+    fill: #509797;
+    stroke: none;
+
+    transition: .3s;
+
+    cursor: pointer;
+}
+
+#gwangju {
+    stroke: #fff;
+    stroke-width: 1.3px;
+}
+
+.south-ko:hover,
+.south-ko:hover>path {
+    fill: rgb(231, 255, 205);
+    filter: drop-shadow(5px 5px 10px rgba(51, 51, 51, 0.4))
+} 
+
+

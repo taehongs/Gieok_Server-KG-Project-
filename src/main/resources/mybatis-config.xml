@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+     <typeAliases>
+     
+     	<typeAlias type="icu.gieok.vo.UserVO" alias="user"/>
+
+     	<typeAlias type="icu.gieok.vo.AuthVO" alias="auth"/>
+     	
+     	<typeAlias type="icu.gieok.vo.ProvinceVO" alias="pro"/>
+     	
+     	<typeAlias type="icu.gieok.vo.CityVO" alias="city"/>
+
+     	<typeAlias type="icu.gieok.vo.FacVO" alias="fac"/>
+     	
+     	<typeAlias type="icu.gieok.vo.BoardVO" alias="board"/>
+
+        <typeAlias type="icu.gieok.vo.BoardLikeReportVO" alias="boardLikeReport"/>
+       
+     	<typeAlias type="icu.gieok.vo.AttrVO" alias="attr"/>
+     	
+        <typeAlias type="icu.gieok.vo.AttrReviewVO" alias="review"/>
+
+        <typeAlias type="icu.gieok.vo.AttrReviewReportVO" alias="attr_review_report"/>
+
+        <typeAlias type="icu.gieok.vo.AttrLikeVO" alias="attrLike"/>
+        
+        <typeAlias type="icu.gieok.vo.WithVO" alias="with"/>
+
+        <typeAlias type="icu.gieok.vo.MessageVO" alias="message"/>
+       
+     </typeAliases>
+  </configuration>
+  

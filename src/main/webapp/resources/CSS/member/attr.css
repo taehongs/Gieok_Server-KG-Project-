@@ -1,0 +1,496 @@
+.attraction_default {
+    position: absolute;
+    top: 100px;
+    
+    width: 100vw;
+    height: calc(100vh - 100px);
+    
+    background: rgba(255, 255, 255, 0);
+   
+   z-index: 1;
+}
+.attraction_container {
+   display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 1200px;
+    height: 800px;
+    
+    background: rgba(255, 255, 255, 0);
+    z-index: 2;
+}
+
+/* 관광 명소 리모컨 */
+.attr_remotectr_con {
+	display: flex;
+    flex-direction: column;
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	width: 150px;
+	height: 150px;
+	justify-content: center;
+	
+	background: rgba(51, 51, 51, 0.8);
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	
+	z-index: 5;
+}
+.attr_remotectr_name {
+	width: 120px;
+	height: 35px;
+	
+	font-size: 18px;
+	font-weight: 1000;
+	color: #fff;
+	text-align: center;
+	line-height: 35px;
+	padding-top: 20px;
+	
+	border-bottom: 1px solid #fff;
+	
+	margin: 1px auto;
+}
+.attr_remotectr_list {
+	width: 100px;
+	height: 105px;
+	
+	margin: 1px auto;
+}
+.attr_remotectr_item {	
+	display: inline-block;
+	
+	width: 100px;
+	height: 35px;
+	
+	list-style: none;
+	text-align: center;
+	line-height: 35px;
+	
+	margin: 1px auto;
+	cursor: pointer;
+}
+.attr_remotectr_item:hover {
+	background: #333333;
+	border-radius: 5px;
+}
+.attr_remotectr_menu {
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* 관광 명소 지도 */
+.attr_map_container {
+	display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    width: 1000px;
+	height: 800px;
+	
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	
+}
+.attr_map {
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+	left: 30px;
+	
+	width: 600px;
+	height: 700px;
+	
+	background: #fff;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	overflow-x: hidden;
+}
+
+/* 명소 부분 추가 */
+
+.attr_title {
+	font-size: 24px;
+	text-align: center;
+	margin-top: 30px;
+	
+}
+
+.attr_rate {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	font-weight: 600;
+}
+
+.attr_info {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 500px;
+	height: 70px;
+	margin-top: 20px;
+	margin-bottom: 20px; 
+	margin-left: 50px;
+	
+}
+
+.attr_info span {
+	font-size: 14px;
+}
+
+.green_line {
+	width: 560px;
+	height: 3px;
+	margin-left: 20px;
+	background: #509797;
+}
+
+.attr_cont {
+	width: 500px;
+	height: 100px;
+	margin-left: 50px; 
+	margin-top: 20px;
+	line-height: 25px;
+	font-size: 14px;
+	overflow-Y: scroll;
+}
+
+.attr_back_btn {
+	width: 500px;
+	margin-left: 50px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.attr_back_btn>label {
+	display: block;
+	
+    position: relative;
+    bottom: 30px;
+    left: 310px;
+
+    width: 40px;
+    height: 30px;
+
+    font-size: 20px;
+    color: #333;
+    line-height: 30px;
+
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: transform, box-shadow .1s, .1s;
+}
+
+.attr_back_btn>label:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 1px 1px #333;
+}
+
+.attr_back_btn>label:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+.attr_back_btn>label>svg,
+.attr_back_btn>label>svg>path {
+	cursor: pointer;
+}
+
+.attr_back_btn>label>svg>path:last-of-type {
+	fill: #fff;
+}
+
+.attr_back_btn>input[type="checkbox"] {
+    display: none;
+}
+
+#check_like:checked+label>svg>path:first-of-type {
+	/* 좋아요 체크시 */
+	fill: #fff;
+}
+
+.back_btn {
+	width: 100px;
+	height: 30px;
+}
+
+.attr_image_container {
+	display: flex;
+}
+
+.attr_image_block {
+	width:560px;
+	height: 300px;
+	margin-top: 30px;
+	margin-left: 20px;
+	border-radius: 20px;
+}
+
+.attr_image {
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 20px;
+	border-radius: 20px;
+	width: 560px;
+	height: 300px;
+	transition: 0.7s;
+}
+
+#attr_image2 {
+	transform: translateX(110%);
+	opacity: 0;
+}
+
+
+.attr_image_btn_container {
+	box-sizing: border-box;
+	position: absolute;
+	top: 360px;
+	left: 280px;
+	display: flex;
+	justify-content: center;
+}
+.attr_image_btn {
+	width: 8px;
+	height: 8px;
+	margin: 1px 3px;
+	border-radius: 10px;
+	border: 2px solid #333;
+	opacity: 0.9;
+	cursor: pointer;
+	background: #fff;
+}
+
+#attr_image_btn1 {
+	background: #333;
+	border: 2px solid #fff;
+}
+
+/*=====사이드 메뉴=====*/
+
+#restaurant,
+#cafe,
+#review {
+	display: none;
+	
+}
+
+#restaurant:checked+label,
+#cafe:checked+label,
+#review:checked+label {
+	background: #333;
+	color: #fff;
+}
+
+
+
+.side_option {
+	display: flex;
+	position: fixed;
+	height: 30px;
+	width: 100%;
+	margin-bottom: 10px;
+	font-size: 0px;
+	
+}
+
+.option1>label {
+	border-radius-top-left: 20px;
+}
+
+.option3>label {
+	border-radius-top-right: 20px;
+}
+
+.option1,
+.option2,
+.option3 {
+	flex: 1;
+	text-align: center;
+	font-size: 16px;
+	letter-spacing: 5px;	
+}
+
+.side_option label {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height:100%;
+	cursor: pointer;
+	line-height: 30px;
+	background: #eee;
+}
+
+
+/*==============*/
+
+.attr_card_con {
+	display: flex;
+    flex-direction: column;
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+	right: 20px;
+	
+	width: 320px;
+	height: 700px;
+
+	/* overflow-y: auto; */
+	
+	background: #fff;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+.attr_card_list::-webkit-scrollbar {
+	width: 5px;
+ 	overflow: hidden;
+}
+.attr_card_list::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 10px;
+}
+
+.attr_card_list {
+	justify-content: center;
+	margin-top: 40px;
+	overflow-Y: auto;	
+}
+.attr_card_img {
+	width: 310px;
+	height: 200px;
+	
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+	border-radius: 20px;
+	
+}
+.attr_card_name {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 1000;
+	width: 310px;
+	text-align: center;
+	line-height: 33px;
+}
+
+.fac_link {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 1000;
+	width: 310px;
+	text-align: center;
+	line-height: 33px;
+	cursor: pointer;
+}
+
+.fac_link:hover {
+	color: #333;
+	text-decoration: underline;	
+}
+
+.attr_review_form {
+	box-sizing: border-box;
+	width: 310px;
+	height: 210px; 
+	border: none;	
+}
+.attr_review_content {
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: none;
+	box-shadow: inset var(--shadow-inner); 
+ 	background: var(--color-lightgray);
+	width: 100%;
+	height: 105px;
+	resize: none;	
+}
+
+.attr_review_file {
+	width: 190px;
+}
+
+.attr_review_img {
+	width: 300px;
+	height: 200px;	
+	object-fit: cover;
+}
+
+
+.attr_review_delete {
+	margin-left: 10px;
+	background: var(--color-red) !important;
+}
+
+
+#content_limit {
+	box-sizing: border-box;
+	width: 50px;
+	font-size: 10px;
+	margin-left: 260px;
+}
+
+.review_submit_btn {
+	margin-top: 5px;
+	width: 46px;
+	margin-left: 250px;
+}
+
+.no_list {
+	display: inline-block;
+	width: 310px;
+	text-align: center;
+}
+
+.review_writer {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 900;
+	margin-bottom: 10px;
+}
+
+.review_list {
+	margin-bottom: 10px;
+}
+
+
+
+/* 반응형  */
+/* @media (max-height: 950px) {
+	.attraction_container {
+	    height: 760px;
+	}
+	.attr_map_container {
+		height: 760px;
+	}
+}
+@media (max-height: 800px) {
+	.attraction_container {
+	    height: 650px;
+	}
+	.attr_map_container {
+		height: 650px;
+	}
+	.attr_map {
+		height: 600px;
+	}
+	.attr_card_con {
+		height: 600px;
+	}
+}
+ */

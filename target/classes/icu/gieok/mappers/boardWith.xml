@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardWith">
+
+	<!-- select문만 resultType명시 필요(없으면 에러발생) -->
+	<!-- 도 목록 -->
+	<select id="with_list_Province" resultType="pro">
+	 select * from province
+	</select>
+	
+	<!-- 시 목록 -->
+	<select id="with_list_City" parameterType="String" resultType="city">
+	 select * from city where province_id = #{province_id} order by city_name
+	</select>
+	
+	<!-- 명소 목록 -->
+	<select id="with_list_Attr" parameterType="String" resultType="attr">
+	 select * from attraction where city_code = #{attr_code} order by attr_name
+	</select>
+	
+	<!-- 동행 등록 -->
+	<insert id="insertWith" parameterType="board">
+	 insert into board (board_no, board_type, board_title, board_writer,
+	  board_content, board_regdate, board_location, board_startDay, board_endDay,
+	  board_memCount, user_code)
+	 values (board_seq.nextval, '3', #{board_title}, #{board_writer},
+	  #{board_content}, sysdate, #{board_location}, TO_DATE(#{board_startDay}, 'YYYY-MM-DD'), TO_DATE(#{board_endDay}, 'YYYY-MM-DD'),
+	  #{board_memCount}, #{user_code})
+	</insert>
+	
+	<!-- Pagination - totalCount -->
+	<select id="countWith" parameterType="java.util.Map" resultType="int">
+	 select count(board_no) from board where board_type='3' and board_state = '0'
+	 	<if test="!category.equals('')">
+	 		and ${category} LIKE '%${keyword}%'
+	 	</if>
+	 	order by board_no desc
+	</select>
+	
+	<!-- 게시물 목록 -->
+	<select id="getWithList" parameterType="java.util.Map" resultType="board">
+	 select * from (
+	 	select rowNum rNum, board_no, board_title, board_writer, board_location,
+	 		board_startDay, board_endDay, board_memCount, board_content from (
+	 			select * from board WHERE board_type = '3' and board_state = '0'
+		 			<if test="!category.equals('')">
+		 				and ${category} LIKE '%${keyword}%'
+		 			</if>
+		 			order by board_no desc
+		 			
+	 		)
+	 ) where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 신청하기 중복 확인 -->
+	<select id="selectWith" parameterType="java.util.Map" resultType="with">
+	 select * from with_table where board_no = #{board_no} and with_user_code = #{with_user_code}
+	</select>
+	
+	<!-- 신청하기 -->
+	<insert id="insert_WT" parameterType="with">
+	 insert into with_table (with_no, board_no, board_writer, with_user_id,
+	 	with_user_code, with_user_info, with_accept)
+	 values (with_seq.nextval, #{board_no}, #{board_writer}, #{with_user_id},
+	 	#{with_user_code}, #{with_user_info}, '1')
+	</insert>
+	
+	<!-- 동행 목록 관리자 삭제 -->
+	<update id="delete_WT" parameterType="int">
+	 update board set board_state = '1' where board_no = #{board_no}
+	</update>
+	
+	<!-- 신청 동행 토탈 페이징 -->
+	<select id="SinCountWith" parameterType="java.util.Map" resultType="int">
+	select count(T1.board_no)
+	from board T1, with_table T2
+	where T1.board_no = T2.board_no AND T1.board_type = '3' AND T1.board_state = '0' AND T2.with_user_id = #{loging_user}
+	 	<if test="!category.equals('')">
+	 		and T1.${category} LIKE '%${keyword}%'
+	 	</if>
+	 	order by T1.board_no desc
+	</select>
+	
+	<!-- 신청 동행 목록 -->
+	<select id="getWithSinDong" parameterType="java.util.Map" resultType="board">
+		select * from (       
+			select rowNum rNum, T1.*, T2.with_user_id, T2.with_accept
+			from board T1 left outer join with_table T2 on T1.board_no = T2.board_no 
+			where T1.board_type = '3' AND T1.board_state = '0' AND T2.with_user_id = #{loging_user}
+			<if test="!category.equals('')">
+		 		and T1.${category} LIKE '%${keyword}%'
+		 	</if>
+		 	order by T1.board_no desc
+			)
+		where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 신청 취소하기 -->
+	<delete id="sinCancel" parameterType="with">
+	 delete from with_table where board_no = #{board_no} AND with_user_id = #{with_user_id}
+	</delete>
+	
+	<!-- 동행 상태 -->
+	<select id="getWithAccept" parameterType="java.util.Map" resultType="with">
+	 select * from with_table where with_user_id=#{with_user_id} AND board_no=#{board_no}
+	</select>
+	
+	<!-- 신고하기 -->
+	
+	<select id="getReportBoardWith" parameterType="java.util.Map" resultType="boardLikeReport">
+		select * from board_like_report where board_no=#{board_no} AND user_code=#{user_code}
+		AND board_report = 'Y'
+	</select>
+	
+	<insert id="insertReportBoardWith" parameterType="boardLikeReport">
+		insert into board_like_report values(report_seq.nextval, #{user_code}, #{bad_member}, 
+									 #{board_no}, 'N', 'Y', #{report_type})
+	</insert>
+	
+	<!-- 동행 삭제시 신고테이블 변경 -->
+	<update id="changeWithReportState" parameterType="int">
+		update board_like_report set board_report = 'N' where board_no = #{board_no}
+	</update>
+	
+</mapper>
+
+

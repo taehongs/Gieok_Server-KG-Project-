@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MyWith">
+
+	<select id="countMyWith" parameterType="java.util.Map" resultType="int">
+		select count(board_no) from board where board_type = '3' and board_state = '0'
+			and board_writer = #{wr_user_id}
+	 	<if test="!category.equals('')">
+	 		and ${category} LIKE '%${keyword}%'
+	 	</if>
+	</select>
+	
+	<select id="getMyWithList" parameterType="java.util.Map" resultType="board">
+		select * from (
+	 	select rowNum rNum, board_no, board_title, board_writer, board_location,
+	 		board_startDay, board_endDay, board_memCount, board_content from (
+	 			select * from board WHERE board_type = '3' and board_state = '0'
+	 				and board_writer = #{wr_user_id}
+		 			<if test="!category.equals('')">
+		 				and ${category} LIKE '%${keyword}%'
+		 			</if>
+		 		order by board_regDate DESC
+		 			
+	 		)
+	 ) where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<delete id="delWithList" parameterType="int">
+		delete from with_table where board_no=#{board_no}
+	</delete>
+	
+	<update id="delMyWith" parameterType="int">
+		update board set board_state = '1' WHERE board_type = '3' and board_no = #{board_no}
+	</update>
+	
+	<select id="getMyWithList2" parameterType="int" resultType="with">
+		select * from with_table where board_no = #{board_no}
+	</select>
+	
+	<update id="acceptMyWith" parameterType="with">
+		update with_table set with_accept = '2' WHERE board_no = #{board_no} and with_user_id = #{with_user_id}
+	</update>
+	
+	<update id="rejectMyWith" parameterType="with">
+		update with_table set with_accept = '3' WHERE board_no = #{board_no} and with_user_id = #{with_user_id}
+	</update>
+	
+	<select id="countWithAccept" parameterType="int" resultType="int">
+		select count(with_no) from with_table where board_no = #{board_no} and with_accept = '2'
+	</select>
+	
+	<select id="countWithPending" parameterType="int" resultType="int">
+		select count(with_no) from with_table where board_no=#{board_no} and with_accept='1'
+	</select>
+	
+	<update id="changeWith" parameterType="int">
+		update with_table set with_accept = '3' WHERE board_no = #{board_no} and with_accept = '1'
+	</update>
+	
+</mapper>
+
+

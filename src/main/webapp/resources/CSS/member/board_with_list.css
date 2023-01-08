@@ -1,0 +1,496 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+
+
+/* =====// contents */
+.board_with {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 20px;
+
+    position: absolute;
+    top: calc(50vh - 450px);
+    right: 0;
+    /*
+        top: 50% - content 높이 / 2
+        left: 50% - content 너비 / 2
+    */
+    z-index: 3;
+
+    width: 1000px;
+    height: 800px;
+
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-basic);
+}
+
+/* =====  // with */
+.board_top {
+    width: 100%;
+    position: relative;
+}
+
+.topbtn {
+	position:absolute;
+	display: flex;
+	top: 20px;
+	margin-left: 3px;
+}
+
+.with_my {
+	display: flex;
+	width: 60px;
+	height: 15px;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	font-family: var(--font-logo);
+	font-size: var(--font-size-cont3);
+    color: #333;
+    background: none;
+	border: none;
+	padding: 1px 1px 1px 1px;
+}
+
+.with_slash {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+/* 	margin-left: 3px; */
+/* 	margin-right: 3px; */
+	color: #909090;
+}
+
+.with_sin {
+	display: flex;
+	width: 60px;
+	height: 15px;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	font-family: var(--font-logo);
+	font-size: var(--font-size-cont3);
+    color: #333;
+    background: none;
+	border: none;
+	padding: 1px 1px 1px 1px;
+}
+
+.with_my:hover,
+.with_sin:hover {
+	transform: translate(-1px, -1px);
+	cursor: pointer;
+}
+
+.board_top h1 { 
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+    width: 100%;
+    height:40px;
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head3);
+    margin-bottom: 10px;
+}
+
+.with-main-point {
+	display: inline-block;
+	text-align: center;
+    width: 150px;
+    height:40px;
+    line-height: 50px;
+}
+
+.with-main-point:hover {
+	cursor: pointer;
+	transform: translate(-1px, -1px);
+}
+
+.board_top > input {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 90px;
+    height: 30px;
+
+    color: #fff;
+    background-color: #333;
+}
+
+/* =====// board column */
+.board_with_list {
+    position: relative;
+    /* 게시글 목록 */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    z-index: 2;
+}
+
+.li_none {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+    width: 800px;
+    height: 200px;
+    
+    font-size: var(--font-size-head6);
+}
+
+.with_list > li {
+    width: 800px;
+    height: 190px;
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    transition: height ease-out 1s;
+}
+
+.with_list > li:hover > .sel_check{
+    height: 200px;
+    transition: height ease-out 1s;
+
+}   
+
+.li_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    line-height: 10px;
+
+    text-align: center;
+
+    transition: height .3s;
+}
+
+.useBtn {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	display: flex;
+	align-items: flex-start;
+	
+	font-family: var(--font-msg);
+	font-size: var(--font-size-cont3);
+	color: var(--color-red);
+	border: none;
+	background: none;
+	
+	cursor: pointer;
+}
+
+.useBtn2 {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	display: flex;
+	align-items: flex-start;
+	
+	font-family: var(--font-msg);
+	font-size: var(--font-size-cont3);
+	color: var(--color-red);
+	border: none;
+	background: none;
+	
+	cursor: pointer;
+}
+
+.useBtn:hover {
+	transform: translate(-1px, -1px);	
+}
+
+.li_box h2 {
+	width: 100%;
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head6);
+}
+
+.li_box p {
+	display: flex;
+	align-items: center;
+	height: 20px;
+	line-height: 20px;
+}
+
+.li_with_cont {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction:column;
+    width: 100%;
+    height: 30px;
+}
+
+.li_box_list {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	color: #909090;
+}
+
+.with_contbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+    resize: none;
+    border: none;
+    
+    background-color: antiquewhite;
+    border-radius: 10px;
+    line-height: 20px;
+}
+
+.with_accept {
+    width: 70px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+
+.with_statusBtn {
+	display: flex;
+	width: 70px;
+    height: 25px;
+    
+	justify-content: center;
+	align-items: center;
+	
+	color: var(--color-darkgray);
+	font-weight: bold;
+	
+    margin-bottom: 5px;
+    border: 1.5px solid var(--color-darkgray);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+/* =====// pagination */
+.board_pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 800px;
+    height: 20px;
+
+    font-size: var(--font-size-cont3);
+}
+
+.prev > span,
+.next > span,
+.prev > a > span,
+.next > a > span  {
+    display: inline-block;
+    
+    width: 50px;
+    height: 20px;
+    
+    line-height: 20px;
+    text-align: center;
+    
+    border-radius: var(--radius-smaller);
+    
+    cursor: pointer;
+}
+
+.board_page {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+    font-size: var(--font-size-cont4);
+}
+
+.board_page > li {
+    width: 30px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+
+    border-radius: var(--radius-smaller);
+
+    cursor: pointer;
+    
+    display: inline-block;
+}
+
+.now_P {
+	background-color: #333;
+    color: #fff;
+}
+
+.board_page > li > a {
+	width: 30px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.board_page > li:hover,
+.board_page > li > a:hover {
+	display: inline-block;
+	background-color: #333;
+    color: #fff;
+    border-radius: var(--radius-smaller);
+}
+
+.board_pagination span,
+.board_pagination li {
+    transition: background-color, color 0.3s, 0.3s;
+}
+
+.board_pagination span:hover,
+.board_pagination li:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* =====// board bottom start //===== */
+.board_bottom {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 800px;
+    height: 30px;
+
+    margin-top: 30px;
+    z-index: 2;
+}
+
+/* =====// search, with end */
+.board_src {
+    /* 하단 검색 */
+    width: 600px;
+    height: 30px;
+
+    text-align: center;
+}
+
+.with_category {
+    width: 100px;
+    height: 30px;
+
+    border-radius: var(--radius-button);
+    
+    cursor: pointer;
+}
+
+.search_field {
+    width: 150px;
+    height: 30px;
+
+    color: #fff;
+    border: 1px solid #333;
+    text-align: center;
+
+    background-color: var(--color-black);
+    margin: 5px;
+    padding: 10px;
+    border-radius: var(--radius-button);
+    box-sizing: border-box;
+}
+
+.search_cont {
+    width: 100px;
+    height: 30px;
+
+    color: #fff;
+
+    background-color: var(--color-black);
+
+    border-radius: var(--radius-button);
+}
+
+
+/* ===== // with-end */
+.board_last {
+    position: absolute;
+    bottom: 30px;
+}

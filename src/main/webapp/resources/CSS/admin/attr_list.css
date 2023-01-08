@@ -1,0 +1,352 @@
+
+
+
+
+/* =====// contents */
+.board_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    position: absolute;
+    top: calc(50% - 400px);
+    right: 0;
+    /*
+        top: 50% - content 높이 / 2
+        left: 50% - content 너비 / 2
+    */
+    z-index: 2;
+
+    width: 1000px;
+    height: 800px;
+
+    background-color: #fff;
+    border-radius: 20px;
+    opacity: .8;
+
+    box-shadow: var(--shadow-basic);
+}
+
+.board_list>div {
+    width: 800px;
+}
+
+.board_top {
+    /* 게시판 제목, 선택 삭제, 게시물 등록 */
+    position: relative;
+    text-align: center;
+
+    height: 30px;
+
+    line-height: 30px;
+}
+
+.board_top>h1 {
+    display: inline;
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-head3);
+}
+
+.board_top>.select_delete,
+.board_top>input {
+    position: absolute;
+}
+
+.board_top>.select_delete {
+    display: inline-block;
+    right: 100px;
+
+    width: 60px;
+    height: 30px;
+
+    font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+.board_top>input {
+    display: inline-block;
+    right: 0;
+
+    width: 90px;
+    height: 30px;
+
+    color: #fff;
+    background-color: #333;
+}
+
+.board_cont {
+    height: 570px;
+
+    box-sizing: border-box;
+    border-top: 3px solid #333;
+    border-bottom: 3px solid #333;
+}
+
+/* =====// board column */
+.list_title {
+    /* 게시글 제목 */
+    display: flex;
+    align-items: center;
+
+    width: 800px;
+    height: 50px;
+
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+}
+
+.list {
+    /* 게시글 목록 */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.board_cont span {
+    /* 게시글 제목, 목록 내 폰트 */
+    display: inline-block;
+
+    font-size: var(--font-size-menu1);
+    font-weight: 600;
+    text-align: center;
+}
+
+.list>li {
+    /* 게시글 목록 */
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+    border-radius: var(--radius-basic);
+
+    transition: box-shadow, transform .1s, .1s;
+}
+
+.list>li:hover {
+    background-color: var(--color-green);
+    box-shadow: var(--shadow-basic);
+    transform: translate(-3px, -3px);
+}
+
+.list>li:hover>span,
+.list>li:hover a,
+.list>li:hover b {
+    color: #fff;
+}
+
+.list>li>span>a:hover {
+    /* 게시글 제목에 링크, 마우스 오버시 밑줄 */
+    text-decoration: underline;
+}
+
+.list b {
+    /* 공지, 이벤트 구분 머릿글, 이벤트 상태 */
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.list>li>span {
+    font-size: var(--font-size-cont3);
+    font-weight: 100;
+}
+
+.list .event_inprogress {
+    color: var(--color-green);
+}
+
+.list .event_end {
+    color: var(--color-red);
+}
+
+.list>li>.board_date {
+    font-size: var(--font-size-cont4);
+}
+
+/* =====// title, list column width */
+.board_no {
+    /* 게시글 번호 */
+    width: 80px;
+}
+
+.board_writer {
+    /* 게시글 작성자 */
+    width: 110px
+}
+
+.detail_name_link {
+	width: 110px;
+	height: 50px;
+}
+
+.board_title {
+    /* 게시글 제목 */
+    width: 380px;
+}
+
+.detail_addr_link {
+	height: 100%;
+	width: 50px;
+}
+
+.board_stat {
+    /* 게시글 상태 */
+    width: 60px;
+}
+
+.board_date {
+    /* 게시글 등록 날짜 */
+    width: 100px;
+}
+
+.board_select {
+    /* 게시글 선택(체크박스) */
+    width: 70px;
+    cursor: pointer;
+}
+
+/* =====// prev, next, page number */
+.board_page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 800px;
+    height: 20px;
+
+    /* font-size: var(--font-size-cont4); */
+}
+
+
+.prev_next {
+    display: inline-block;
+
+    width: 50px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+
+    border-radius: var(--radius-smaller);
+
+    cursor: pointer;
+}
+
+.select_page {
+	background-color: #333;
+    color: #fff;
+}
+
+.board_page {
+    width: 400px;
+}
+
+.board_page>li {
+
+	width: 30px;
+    height: 20px;
+
+    line-height: 20px;
+    text-align: center;
+
+    border-radius: var(--radius-smaller);
+}
+
+.board_page>li>a {
+	display: block;
+	border-radius: var(--radius-smaller);
+}
+
+
+.board_page span,
+.board_page li {
+    transition: background-color, color .3s, .3s;
+}
+
+.board_page span:hover,
+.board_page li:hover >a {
+    background-color: #333;
+    color: #fff;
+}
+
+/* =====// contents end //===== */
+
+/* =====// board bottom start //===== */
+.board_bottom {
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    width: 800px;
+    height: 30px;
+}
+
+/* =====// search, sort, event end */
+.board_sort {
+    /* 하단 정렬 */
+    width: 150px;
+    height: 30px;
+
+    text-align: center;
+}
+
+.board_search {
+    /* 하단 검색 */
+    width: 350px;
+    height: 30px;
+
+    text-align: center;
+}
+
+.board_sort>select,
+.board_search>select {
+    width: 70px;
+    height: 30px;
+
+    border-radius: var(--radius-button);
+}
+
+.board_sort>input,
+.board_search>input {
+    width: 70px;
+    height: 30px;
+
+
+    background-color: var(--color-black);
+    margin-left: 5px;
+
+    border-radius: var(--radius-button);
+}
+
+.board_search>input[type="text"] {
+    width: 140px;
+
+    background-color: #fff;
+    border: 1px solid #333;
+
+    padding: 0 10px;
+}
+
+
+.del_btn{
+    width: 70px;
+    height: 30px;
+    margin: 0;
+	border:none;
+	box-sizing: border-box;
+	background-color:transparent;
+    font-size: var(--font-size-cont3);
+    color: var(--color-red);
+    font-weight: 900;
+    cursor: pointer;	
+    
+}
+
+/* =====// board bottom end //===== */

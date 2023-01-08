@@ -1,0 +1,406 @@
+/* =====// section //===== */
+/* =====// title */
+/* description */
+
+/*
+    !! root 변수
+    (이름 => {name} : 내용)
+
+    >> 폰트
+    --font-{name}
+        로고 => logo: 강원교육튼튼
+        제목 => title: 강원교육튼튼
+        내용 => cont: 나눔고딕
+        메시지 => msg: 강원교육모두
+
+    >> 폰트 크기
+    --font-size-{name}
+        로고 => logo: 30px
+        제목 => head1 ~ 6: 28 ~ 18px (n-=2)
+        내용 => cont1 ~ 4: 16 ~ 10px (n-=2)
+        메뉴 => menu1, 2: 12px, 14px
+        버튼 => button: 14px;
+        입력 => input: 12px;
+
+    >> 색상
+    --color-{name}
+        메인 => main: #
+        서브 => sub: #
+
+        메뉴 => navi: rgba(51, 51, 51 .2)
+
+        블랙 => black: #333333;
+            기본 폰트, 검정 대용
+        레드 => red: #092C2C;
+            경고(변경, 탈퇴, 삭제 등)
+        그린 => green: #509797;
+            긍정(동의, 저장, 확인 등)
+        그레이 => gray: #CCCCCC;
+            배경 회색
+        다크그레이 => darkgray: #909090
+            폰트 회색
+
+        그림자(기본) => shadow: rgba(0, 0, 0, .2)
+            그림자 색(투명도 20%)
+        그림자(폰트용) => shadow-font: rgba(0, 0, 0, .7)
+            그림자 색(투명도 70%)
+        
+    >> 그림자
+    --shadow-{name}
+        기본 => basic: 3px 3px 5px var(--color-shadow)
+            기본적인 바깥 그림자
+        안쪽 => inner: 0px 3px 3px var(--color-shadow)
+            게시판 컨텐츠용 안쪽 그림자
+        폰트 => font: 3px 3px 5px var(--color-shadow-font)
+
+    >> 모서리
+    --radius-{name}
+        기본 => basic => 20px
+            큰 창
+        버튼 => button => 5px
+            작은 창, 대부분 input, button 등
+        소형 => samller => 3px
+            checkbox 등
+*/
+
+/* =====// contents start //===== */
+.content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    top: 100px;
+    left: calc(50% - 600px);
+    z-index: 1;
+
+    width: 1200px;
+    height: calc(100vh - 100px);
+    min-height: 600px;
+}
+
+.user_list_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 1000px;
+    height: 800px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-basic);
+    box-shadow: var(--shadow-basic);
+
+    font-size: 0;
+}
+
+.line_big,
+.line_small {
+    width: 800px;
+    background-color: #333;
+    border-radius: 3px;
+}
+
+.line_big {
+    height: 2px;
+}
+
+.line_small {
+    height: 1px;
+}
+
+.user_title {
+    width: 800px;
+    /* height: 30px; */
+
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+    text-align: center;
+}
+
+.user_column,
+.user_list {
+    height: 45px;
+
+    text-align: center;
+    line-height: 45px;
+}
+
+.user_column {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user_list {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	
+    width: 750px;
+    height: 500px;
+
+    font-size: 0;
+    padding: 0 25px;
+}
+
+.user_list>li {
+	margin: 2.5px 0;
+}
+
+.user_column>span,
+.user_list>li>span {
+    display: inline-block;
+    height: 45px;
+}
+
+.user_list>li>span:first-of-type,
+.user_column>span:first-of-type {
+    width: 80px;
+}
+
+.user_list>li>span:nth-of-type(2),
+.user_column>span:nth-of-type(2) {
+    width: 110px;
+}
+
+.user_list>li>span:nth-of-type(3),
+.user_column>span:nth-of-type(3) {
+    width: 110px;
+}
+
+.user_list>li>span:nth-of-type(4),
+.user_column>span:nth-of-type(4) {
+    width: 130px;
+}
+
+.user_list>li>span:nth-of-type(5),
+.user_column>span:nth-of-type(5) {
+    width: 200px;
+}
+
+
+.user_list>li>span:last-of-type,
+.user_column>span:last-of-type {
+    width: 100px;
+}
+
+.user_list>li {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    
+    transition: background-color, color .3s, .3s;
+}
+
+.user_list>li:hover {
+    background-color: var(--color-green);
+    color: #fff;
+}
+
+.user_list>li {
+	display: flex;
+	justify-content: space-between;
+	
+	height: 45px;
+	
+	margin: 2.5px 0;
+}
+
+.user_list>li>span {
+    transition: color .3s;
+
+    cursor: pointer;
+}
+
+.user_list>li>span {
+    font-size: 14px;
+}
+
+.user_list>li:hover>span {
+    color: #fff;
+}
+
+.user_search {
+    width: 800px;
+    height: 30px;
+    text-align: center;
+}
+
+.user_search>select {
+    width: 100px;
+    height: 30px;
+
+    border-radius: 5px;
+}
+
+.user_search>input {
+    width: 100px;
+    height: 30px;
+
+    margin-left: 10px;
+}
+
+.user_page {
+	display: flex;
+	justify-content: space-between;
+	
+	width: 800px;
+	height: 25px;
+	
+	font-size: 0;
+	
+	margin: 10px 0;
+}
+
+.user_page>span,
+.user_page>span>a,
+.page>li,
+.page>li>a{
+	width: 40px;
+	height: 25px;
+	
+	font-size: 14px;
+	color: #333;
+	line-height: 25px;
+	text-align: center;	
+
+	border-radius: 3px;
+}
+
+.user_page>span {
+	display: inline-block;
+	
+}
+
+.page>li>a,
+.user_page>span>a {
+	display: block;
+}
+
+.user_page>span:hover,
+.user_page>span>a:hover,
+.page>li:hover>a {
+	color: #fff;
+	
+	background-color: #333;
+	
+	cursor: pointer;
+}
+
+.page {
+	display: flex;
+	justify-content: space-evenly;
+	
+	width: 600px;
+	height: 25px;
+}
+
+.page>.select_page {
+	font-size: 14px;
+}
+
+/* ===== user_list_detail ===== */
+.user_detail_box {
+	position: absolute;
+	top: calc(50% - 250px);
+	left: calc(50% - 150px);
+	z-index: -1;  
+    opacity: 0;
+	
+    width: 300px;
+    height: 400px; 
+    padding: 0 50px;
+    
+	background-color: #fff;
+	border-radius: 20px; 
+    box-shadow: var(--shadow-basic);
+    
+    transition: top, opacity .7s, .7s;
+}
+
+.user_detail_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    height: 350px;
+}
+
+.user_detail_box>h1 {
+    font-family: var(--font-logo);
+    font-size: var(--font-size-logo);
+}
+
+.user_profile {
+    width: 80px;
+    height: 80px;
+
+    background-color: var(--color-darkgray);
+    border-radius: 40px;
+}
+
+.user_id,
+.user_name,
+.user_phone,
+.user_email {
+    width: 280px;
+    height: 16px;
+
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+
+    padding: 7px 10px;
+
+    background-color: var(--color-lightgray);
+    border-radius: 5px;
+    box-shadow: inset var(--shadow-inner);
+}
+
+.user_id::before,
+.user_name::before,
+.user_phone::before,
+.user_email::before {
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.user_id::before {
+    content: "아이디 : ";
+}
+
+.user_name::before {
+    content: "이름 : ";
+}
+
+.user_phone::before {
+    content: "연락처 : ";
+}
+
+.user_email::before {
+    content: "이메일 : ";
+}
+
+.user_state_button {
+	text-align: center;
+}
+
+.user_state_button>input {
+    height: 30px;
+    font-weight: 600;
+}
+
+.user_delete_button {
+    width: 80px;
+
+    background-color: var(--color-red) !important;
+}
+
+.user_state_button>input[type="button"]:last-of-type {
+    width: 60px;
+
+    color: #333;
+
+    background-color: #fff;
+    border: 2px solid #333;
+}

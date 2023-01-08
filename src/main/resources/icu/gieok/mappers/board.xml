@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+	<insert id="notice_insert">
+		insert into board(board_no, board_type, board_writer, board_title, board_content, board_regdate, user_code)
+		values(board_seq.nextval, #{board_type}, #{board_writer}, #{board_title}, #{board_content}, sysdate, #{user_code})
+	</insert>
+	
+	<insert id="event_insert">
+		insert into board(board_no, board_type, board_writer, board_title, board_content, board_regdate, board_startDay, board_endDay, board_img1, board_img2, user_code)
+		values(board_seq.nextval, #{board_type}, #{board_writer}, #{board_title}, #{board_content}, sysdate, 
+		TO_DATE(#{board_startDay}, 'YYYY-MM-DD'), TO_DATE(#{board_endDay}, 'YYYY-MM-DD'),
+		#{board_img1}, #{board_img2}, #{user_code})
+	</insert>
+	
+	<select id="board_list" parameterType="java.util.Map" resultType="board">
+		select * from
+		(select rowNum rNum, board_no, board_type, board_writer, board_title, board_content, board_regdate, board_startDay, board_endDay, board_hit from
+		(select * from board
+		<where>
+			<choose>
+				<when test="list_search != ''">
+					<if test="board_sort == 'all'">
+						(board_type='1' or board_type='2') and board_state=0 and ${search_option} like '%${list_search}%' order by board_no desc
+					</if>
+					<if test="board_sort == ''">
+						(board_type='1' or board_type='2') and board_state=0 and (board_title like '%${list_search}%' or board_content like '%${list_search}%') order by board_no desc
+					</if>
+					<if test='board_sort.equals("1") or board_sort.equals("2")'>
+						board_type=#{board_sort} and board_state=0 and ${search_option} like '%${list_search}%' order by board_no desc
+					</if>
+					<if test='board_sort == "desc" or board_sort == "asc"'>
+						(board_type='1' or board_type='2') and board_state=0 and ${search_option} like '%${list_search}%' order by board_no ${board_sort}
+					</if>
+				</when>
+				<otherwise>
+					<if test='board_sort == "all" or board_sort == ""'>
+						(board_type='1' or board_type='2') and board_state=0 order by board_no desc
+					</if>
+					<if test='board_sort.equals("1") or board_sort.equals("2")'>
+						board_type=#{board_sort} and board_state=0 order by board_no desc
+					</if>
+					<if test='board_sort == "desc" or board_sort == "asc"'>
+						(board_type='1' or board_type='2') and board_state=0 order by board_no ${board_sort}
+					</if>
+				</otherwise>
+			</choose>
+		</where>
+		))
+		where rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="board_count" parameterType="java.util.Map" resultType="int">
+		select count(*) from board 
+		<where>
+			<choose>
+				<when test="list_search != ''">
+					<if test="board_sort == 'all'">
+						(board_type='1' or board_type='2') and board_state=0 and ${search_option} like '%${list_search}%'
+					</if>
+					<if test="board_sort == ''">
+						(board_type='1' or board_type='2') and board_state=0 and (board_title like '%${list_search}%' or board_content like '%${list_search}%')
+					</if>
+					<if test='board_sort.equals("1") or board_sort.equals("2")'>
+						board_type=#{board_sort} and board_state=0 and ${search_option} like '%${list_search}%'
+					</if>
+					<if test='board_sort == "desc" or board_sort == "asc"'>
+						(board_type='1' or board_type='2') and board_state=0 and ${search_option} like '%${list_search}%' order by board_no ${board_sort}
+					</if>
+				</when>
+				<otherwise>
+					<if test='board_sort == "all" or board_sort == ""'>
+						(board_type='1' or board_type='2') and board_state=0 order by board_no desc
+					</if>
+					<if test='board_sort.equals("1") or board_sort.equals("2")'>
+						board_type=#{board_sort} and board_state=0 order by board_no desc
+					</if>
+					<if test='board_sort == "desc" or board_sort == "asc"'>
+						(board_type='1' or board_type='2') and board_state=0 order by board_no ${board_sort}
+					</if>
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="board_cont" resultType="board">
+		select * from board where board_no=#{board_no}
+	</select>
+	
+	<update id="board_hitup">
+		update board set board_hit=board_hit+1 where board_no=#{board_no}
+	</update>
+	
+	<select id="board_detail" resultType="icu.gieok.vo.BoardVO">
+		select * from board where board_no=#{board_no}	
+	</select>
+	
+	<update id="board_del">
+		update board set board_state='1', board_deleteDate=sysdate where board_no=#{board_no}
+	</update>
+	
+	<update id="notice_up">
+		update board set board_title=#{board_title}, board_content=#{board_content}, board_updateDate=sysdate where board_no=#{board_no}
+	</update>
+	
+	<update id="event_up">
+		update board set board_title=#{board_title}, board_content=#{board_content}, board_updateDate=sysdate, 
+		board_startDay=TO_DATE(#{board_startDay}, 'YYYY-MM-DD'), board_endDay=TO_DATE(#{board_endDay}, 'YYYY-MM-DD'),
+		board_img1=#{board_img1}, board_img2=#{board_img2} where board_no=#{board_no}
+	</update>
+	
+	<update id="board_eventEnd">
+		update board set board_endDay=sysdate-1 where board_no=#{board_no} and board_type='2'
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC ".//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	
+	<select id="idDupCheck" parameterType="String" resultType="user">
+		select * from users where user_id = #{id_input} AND user_state='0'
+	</select>
+	
+	<insert id="userInsert" parameterType="user">
+		insert into users (
+			user_code, user_id, user_pw, user_name, user_email, user_domain, 
+			user_mobcarr, user_ph1, user_ph2, user_ph3, user_terms, user_regDate
+			) values (
+				user_seq.nextval, #{user_id}, #{user_pw}, #{user_name}, #{user_email}, 
+				#{user_domain}, #{user_mobcarr}, #{user_ph1}, #{user_ph2}, #{user_ph3},
+				#{user_terms}, SYSDATE
+				)
+	</insert>
+	
+	<update id="updateAuthKey" parameterType="java.util.Map">
+		update users set user_key = #{authKey} where user_id = #{user_id} AND user_state='0'
+	</update>
+	
+	<update id="updateAuth" parameterType="java.util.Map">
+		update users set user_auth=1 where user_key=#{authKey} and 
+			user_email=#{user_email} and user_domain=#{user_domain} AND user_state='0'
+	</update>
+	
+	<select id="checkAuth" parameterType="java.util.Map" resultType="user">
+		select * from users where user_id=#{user_id} AND user_state='0'
+	</select>
+	
+	<select id="userSelect" parameterType="String" resultType="user">
+		select * from users where user_id = #{user_id} AND user_state='0'
+	</select>
+	
+	<update id="updateUserInform" parameterType="user">
+		update users set user_email = #{user_email}, user_domain = #{user_domain}, user_mobcarr = #{user_mobcarr}, 
+		user_ph1 = #{user_ph1}, user_ph2 = #{user_ph2}, user_ph3 = #{user_ph3}, user_profile = #{user_profile}
+		where user_id = #{user_id} and user_state='0'
+	</update>
+
+	<update id="userDelete" parameterType="String">
+		update users set user_state = 'd', user_delDate=SYSDATE where user_id = #{user_id}
+	</update>
+	
+	<update id="updateUserPw" parameterType="java.util.Map">
+		update users set user_pw = #{user_pw} where user_id = #{user_id} AND user_state='0'
+	</update>
+	
+	<select id="userIdPwFind" parameterType="java.util.Map" resultType="user">
+		select * from users 
+		where user_email = #{user_email} and user_domain = #{user_domain} and user_state='0'
+		and user_mobcarr = #{user_mobcarr} and user_ph1 = #{user_ph1} and user_ph2 = #{user_ph2} and user_ph3 = #{user_ph3}
+	</select>
+	
+	<select id="emailDupCheck" parameterType="java.util.Map" resultType="int">
+		select count(user_code) from users where user_email = #{email_input} and user_domain = #{domain_input}
+		AND user_state='0'
+	</select>
+	
+	<update id="changeStateLeave1" parameterType="int">
+		update attr_review set rev_state = 'D' where user_code=#{user_code}
+	</update>
+
+	<update id="changeStateLeave2" parameterType="int">
+		update board set board_state = '1' where user_code=#{user_code} and board_type IN ('3', '4')
+	</update>
+	
+	<select id="getMyReviewList" parameterType="int" resultType="review">
+		
+		select * from (
+			select rowNum rNum, rev_code, rev_content, rev_rate, rev_date, attr_code from (
+				select * from attr_review where rev_state = 'R' AND user_code=#{user_code} order by rev_code DESC
+			)
+		) WHERE rNum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getMyReviewCount" parameterType="java.util.Map" resultType="int">
+		select count(rev_code) from attr_review where user_code=#{user_code} and rev_state='R'
+	</select>
+	
+	<select id="reviewDetail" parameterType="java.util.Map" resultType="review">
+		select * from attr_review where rev_state='R' and user_code=#{user_code} and rev_code=#{rev_code}
+	</select>
+	
+	<update id="reviewUpdate" parameterType="review">
+		update attr_review set rev_content=#{rev_content}, rev_rate=#{rev_rate}, rev_img=#{rev_img}, rev_date=SYSDATE
+		WHERE rev_code=#{rev_code} AND rev_state='R'
+	</update>
+
+	<update id="reviewDelete" parameterType="java.util.Map">
+		update attr_review set rev_state='D' where user_code=#{user_code} and rev_code=#{rev_code}
+	</update>
+	
+	<insert id="sendMessage" parameterType="message">
+		insert into message values(message_seq.nextval, #{message_sender}, #{message_receiver}, #{message_title}, 
+									#{message_content}, '0', 'N', SYSDATE)
+	</insert>
+	
+	<select id="getMyMessage" parameterType="java.util.Map" resultType="message">
+		select * from message where message_receiver=#{message_receiver} AND message_state='0'
+ 		<if test="category.equals('all')">
+			AND (message_title LIKE '%${keyword}%' OR message_content LIKE '%${keyword}%' OR message_sender LIKE '%${keyword}%')
+		</if>
+ 		<if test="!category.equals('all')">
+			AND ${category} LIKE '%${keyword}%'
+		</if> 
+		order by message_date DESC
+	</select>
+	
+	<update id="updateMessageRead" parameterType="java.util.Map">
+		update message set message_read = 'Y' where message_no=#{message_no} AND message_state='0'
+	</update>
+	
+	<select id="countUnreadMessage" parameterType="java.util.Map" resultType="int">
+		select count(message_no) from message where message_receiver=#{message_receiver} AND message_state='0'
+		AND message_read = 'N'
+	</select>
+	
+	
+	<update id="deleteMessage" parameterType="int">
+		update message set message_state='1' where message_no IN
+		<foreach collection="array" item="message_no" open="(" close=")" separator=",">
+			#{message_no}
+		</foreach>	
+	</update>
+	
+	
+	
+	
+
+</mapper>

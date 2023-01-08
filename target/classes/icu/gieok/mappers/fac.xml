@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC ".//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fac">
+
+	<insert id="insertFac" parameterType="fac">
+		insert into attr_facility values (
+			fac_seq.nextval, #{fac_type}, #{fac_name}, #{fac_link}, #{fac_addr}, 
+			#{fac_optime}, #{fac_cltime}, #{fac_img}, SYSDATE, #{user_code}, #{attr_code}) 
+	</insert>
+	
+	<select id="getProvinceId2" parameterType="int" resultType="String">
+		select province_id from city where city_code = (select city_code from attraction where attr_code = #{attr_code})
+	</select>
+	
+	<select id="getCityCode" parameterType="int" resultType="int">
+		select city_code from attraction where attr_code = #{attr_code}
+	</select>
+	
+	<select id="getFacList" parameterType="java.util.Map" resultType="fac">
+		select * from (
+				select rownum rnum, fac_code, fac_name, fac_addr, fac_type, fac_regdate from (select * from attr_facility
+				<where>
+					attr_code = #{attr_code}
+					<if test="category.equals('') and !keyword.equals('')">
+						AND fac_name LIKE '%${keyword}%'
+					</if>
+					<if test='category.equals("1")'>
+						AND fac_type = #{category} AND fac_name LIKE '%${keyword}%'
+					</if>
+					<if test='category.equals("2")'>
+						AND fac_type = #{category} AND fac_name LIKE '%${keyword}%'
+					</if>
+				</where>
+				<if test="sortBy.equals('fac_code')">
+					order by ${sortBy} asc
+				</if>
+				<if test="sortBy.equals('fac_regdate')">
+					order by ${sortBy} desc
+				</if>
+				<if test="sortBy.equals('fac_name')">
+					order by ${sortBy} asc
+				</if>
+				<if test="sortBy.equals('')">
+					order by fac_code desc
+				</if>
+				)
+			) where rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getFac" parameterType="int" resultType="fac">
+		select * from attr_facility where fac_code = #{fac_code}
+	</select>
+	
+	<update id="updateFac" parameterType="fac">
+		update attr_facility set fac_type = #{fac_type}, fac_name = #{fac_name}, fac_link = #{fac_link}, fac_addr = #{fac_addr}, fac_optime = #{fac_optime}, fac_cltime = #{fac_cltime}, fac_img = #{fac_img} where fac_code = #{fac_code}
+	</update>
+	
+	<select id="countFac" parameterType="java.util.Map" resultType="int">
+		select count(fac_code) from attr_facility
+			where attr_code = #{attr_code} 
+			<if test="category.equals('') and !keyword.equals('')">
+				AND fac_name LIKE '%${keyword}%'
+			</if>
+			<if test='category.equals("1")'>
+				AND fac_type = #{category} AND fac_name LIKE '%${keyword}%'
+			</if>
+			<if test='category.equals("2")'>
+				AND fac_type = #{category} AND fac_name LIKE '%${keyword}%'
+			</if>
+	</select>
+	
+	<select id="getDeleteFacList" parameterType="java.util.List" resultType="fac">
+		select * from attr_facility where fac_code IN
+			<foreach collection="list" item="fac_code" open="(" close=")" separator=",">
+				#{fac_code}
+			</foreach>
+	</select>
+	
+	<delete id="deleteFac" parameterType="java.util.List">
+		delete from attr_facility where fac_code IN
+			<foreach collection="list" item="fac_code" open="(" close=")" separator=",">
+				#{fac_code}
+			</foreach>
+	</delete>
+	
+</mapper>
